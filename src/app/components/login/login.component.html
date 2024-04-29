@@ -1,0 +1,39 @@
+<div class="container">
+    <div class="screen">
+        <div class="screen__content">
+            <form class="login" [formGroup]="loginForm" (ngSubmit)="login()">
+                <div class="login__field">
+                    <i class="login__icon fas fa-user"></i>
+                    <input formControlName="username" type="text" class="login__input" placeholder="User name / Email">
+                    <p *ngIf="loginForm.get('username')?.invalid && loginForm.get('username')?.touched">
+                        Username is
+                        required</p>
+
+                </div>
+                <div class="login__field">
+                    <i class="login__icon fas fa-lock"></i>
+                    <input formControlName="password" type="password" class="login__input" placeholder="Password">
+                    <p *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched"
+                        class="error-message">Password is required</p>
+                </div>
+                <button class="button login__submit">
+                    <span class="button__text">Log In Now</span>
+                    <i class="button__icon fas fa-chevron-right"></i>
+                </button>
+            </form>
+            <div class="social-login">
+                <div class="social-icons">
+                    <a href="#" class="social-login__icon fab fa-instagram"></a>
+                    <a href="#" class="social-login__icon fab fa-facebook"></a>
+                    <a href="#" class="social-login__icon fab fa-twitter"></a>
+                </div>
+            </div>
+        </div>
+        <div class="screen__background">
+            <span class="screen__background__shape screen__background__shape4"></span>
+            <span class="screen__background__shape screen__background__shape3"></span>
+            <span class="screen__background__shape screen__background__shape2"></span>
+            <span class="screen__background__shape screen__background__shape1"></span>
+        </div>
+    </div>
+</div>
