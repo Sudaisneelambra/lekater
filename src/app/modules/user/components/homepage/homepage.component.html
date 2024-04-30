@@ -1,0 +1,39 @@
+<div class="min-h-full max-h-full overflow-scroll">
+    <div class=" min-h-full max-h-full   bg-gray-900">
+      <div class="container mx-auto px-4 py-8">
+        <h1 class="text-3xl font-semibold text-white mb-4">Todo App</h1>
+        
+        <!-- Todo Input -->
+        <form (ngSubmit)="addTask()" #todoForm="ngForm">
+          <div class="flex flex-col lg:flex-row items-center mb-4 gap-6 lg:gap-0">
+            <input type="text" name="title" class="w-full h-14 md:w-full px-4 py-2 mb-2 md:mb-0 mr-0 md:mr-4 bg-gray-800 text-white border border-gray-700 rounded-md focus:outline-none focus:border-yellow-500" placeholder="Enter title"  required>
+            <input type="text" name="description" class="w-full h-14 px-4 py-2 mb-2 md:mb-0 mr-0 md:mr-4 bg-gray-800 text-white border border-gray-700 rounded-md focus:outline-none focus:border-yellow-500" placeholder="Enter description"  required>
+            <button type="submit" class="px-4 md:w-3/6 w-full py-2 text-white md:mt-0 rounded-md bg-yellow-700 hover:bg-yellow-800 focus:outline-none" [disabled]="!todoForm.valid">Add</button>
+          </div>
+        </form>
+        
+    
+        
+        <!-- Todo List -->
+        <div class="flex-col-reverse flex">
+          <!-- Single Todo Item -->
+          <div 
+          class="flex items-center  justify-between bg-gray-800 p-4 mb-4 rounded-md  hover:border hover:border-yellow-700 transition duration-100">
+            <div class="flex items-center">
+              <input type="checkbox" class="mr-4">
+              <div >
+                <h2 class="text-white font-semibold mb-2">{{'task.title'}}</h2>
+                <p class="text-gray-400">{{'task.description'}}</p>
+              </div>
+            </div>
+            <div>
+              <button class="px-8 py-2 bg-red-600 text-white rounded-md hover:bg-red-800 focus:outline-none">Delete</button>
+            </div>
+          </div>
+          
+          <!-- Repeat this for each todo item -->
+          
+        </div>
+      </div>
+    </div>
+    </div>
