@@ -5,7 +5,9 @@ import { RouterModule } from '@angular/router';
 import { UserRoutingModule } from './user-routing.module';
 import { UserHomepageComponent } from './components/homepage/homepage.component';
 import { UserNavBarComponent } from './components/nav-bar/nav-bar.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { OrdercreationComponent } from './components/homepage/ordercreation/ordercreation.component';
+import { LatestOrderComponent } from './components/homepage/latest-order/latest-order.component';
 
 
 
@@ -13,13 +15,16 @@ import { FormsModule } from '@angular/forms';
   declarations: [
     UserComponent,
     UserHomepageComponent,
-    UserNavBarComponent
+    UserNavBarComponent,
+    OrdercreationComponent,
+    LatestOrderComponent
   ],
   imports: [
     CommonModule,
     UserRoutingModule,
     RouterModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule 
   ]
 })
 export class UserModule { }
