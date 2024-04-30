@@ -8,14 +8,17 @@
 }
 
 body {
-	background: linear-gradient(90deg, #C7C5F4, #776BCC);		
+	background: linear-gradient(90deg, #C7C5F4, #776BCC);	
 }
 
-.container {
+.containe {
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	min-height: 100vh;
+	background-image: url('https://lekater.com/wp-content/uploads/2021/12/VIEW-12-LK039-LAXE-CORNER-min-scaled.jpg');
+	background-position: center;
+	background-size: cover;
 }
 
 .screen {		
@@ -24,6 +27,20 @@ body {
 	height: 600px;
 	width: 360px;	
 	box-shadow: 0px 0px 24px #5C5696;
+}
+@media(max-width:400px){
+	.screen{
+		width: 300px;
+	}
+	.login__submit{
+		width: 85% !important;
+	}
+}
+
+@media (max-width:670px){
+	.icon{
+		display: none !important;
+	}
 }
 
 .screen__content {
@@ -55,6 +72,8 @@ body {
 	top: -50px;
 	right: 120px;	
 	border-radius: 0 72px 0 0;
+	border: 1px solid rgba(255, 255, 255, 0.271);
+
 }
 
 .screen__background__shape2 {
@@ -64,6 +83,8 @@ body {
 	top: -172px;
 	right: 0;	
 	border-radius: 32px;
+	border: 1px solid rgba(255, 255, 255, 0.271);
+
 }
 
 .screen__background__shape3 {
@@ -73,6 +94,8 @@ body {
 	top: -24px;
 	right: 0;	
 	border-radius: 32px;
+	border: 1px solid rgba(255, 255, 255, 0.271);
+
 }
 
 .screen__background__shape4 {
@@ -82,12 +105,13 @@ body {
 	top: 420px;
 	right: 50px;	
 	border-radius: 60px;
+	border: 1px solid rgba(255, 255, 255, 0.271);
+
 }
 
 .login {
-	width: 320px;
 	padding: 30px;
-	padding-top: 156px;
+	padding-top: 90px;
 }
 
 .login__field {
@@ -108,7 +132,6 @@ body {
 	padding: 10px;
 	padding-left: 24px;
 	font-weight: 700;
-	width: 75%;
 	transition: .2s;
 }
 
