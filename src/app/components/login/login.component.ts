@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { CommonService } from 'src/app/services/common.service';
 
 @Component({
@@ -13,7 +14,8 @@ export class LoginComponent implements OnInit {
   errormessage!:string
   constructor(
     private formBuilder: FormBuilder,
-    private commonService: CommonService
+    private commonService: CommonService,
+    private router:Router
   ) {}
   loginForm!: FormGroup;
   loginButton: Boolean = false;
@@ -38,6 +40,7 @@ export class LoginComponent implements OnInit {
         next: (res) => {
           if(res.success) {
             this.message=res.message
+            this.router.navigate(['/user'])
           } else {
             this.errormessage=res.message
           }
