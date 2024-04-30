@@ -8,6 +8,9 @@ import { CommonService } from 'src/app/services/common.service';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
+
+  message!:string
+  errormessage!:string
   constructor(
     private formBuilder: FormBuilder,
     private commonService: CommonService
@@ -20,25 +23,32 @@ export class LoginComponent implements OnInit {
   }
   initializeForm() {
     this.loginForm = this.formBuilder.group({
-      username: ['', Validators.required],
+      email: ['', Validators.required],
       password: ['', Validators.required],
     });
   }
 
   login() {
+    this.errormessage=''
+    this.message=''
     this.loginButton = true;
     if (this.loginForm.valid) {
       console.log(this.loginForm.value);
       this.commonService.login(this.loginForm.value).subscribe({
         next: (res) => {
-          console.log(res);
+          if(res.success) {
+            this.message=res.message
+          } else {
+            this.errormessage=res.message
+          }
         },
         error: (err) => {
+          this.errormessage=err.error.message
           console.log(err);
         },
       });
     } else {
-      alert('fill the fields to login');
+      alert('fill the fields or fill in correct formate');
     }
   }
 }

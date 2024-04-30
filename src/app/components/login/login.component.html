@@ -1,12 +1,16 @@
-<div class="container">
-    <div class="screen">
-        <div class="screen__content">
+<div class="containe relative">
+    <img class="icon h-[70px] w- absolute top-10 left-10" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRS4HPrdHK9wYjsIeLvM8MOajnscH7mcLhVf62uNEHE3g&s" alt="">
+    <div class="screen rounded-lg !overflow-hidden">
+        <div class="screen__content ">
+            <div class="w-full  flex justify-center !pt-10">
+                <img class="h-[50px]" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRS4HPrdHK9wYjsIeLvM8MOajnscH7mcLhVf62uNEHE3g&s" alt="">
+            </div>
             <form class="login" [formGroup]="loginForm" (ngSubmit)="login()">
                 <div class="login__field">
                     <i class="login__icon fas fa-user"></i>
-                    <input formControlName="username" type="text" class="login__input" placeholder="User name / Email">
-                    <p *ngIf="loginForm.get('username')?.invalid && loginForm.get('username')?.touched">
-                        Username is
+                    <input formControlName="email" type="text" class="login__input" placeholder="Email">
+                    <p *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched">
+                        email is
                         required</p>
 
                 </div>
@@ -21,19 +25,8 @@
                     <i class="button__icon fas fa-chevron-right"></i>
                 </button>
             </form>
-            <div class="social-login">
-                <div class="social-icons">
-                    <a href="#" class="social-login__icon fab fa-instagram"></a>
-                    <a href="#" class="social-login__icon fab fa-facebook"></a>
-                    <a href="#" class="social-login__icon fab fa-twitter"></a>
-                </div>
-            </div>
-        </div>
-        <div class="screen__background">
-            <span class="screen__background__shape screen__background__shape4"></span>
-            <span class="screen__background__shape screen__background__shape3"></span>
-            <span class="screen__background__shape screen__background__shape2"></span>
-            <span class="screen__background__shape screen__background__shape1"></span>
+            <h1 class="w-full text-center text-[#2aff2a]">{{message}}</h1>
+            <h1 class="w-full text-center text-[red]">{{errormessage}}</h1>
         </div>
     </div>
 </div>
