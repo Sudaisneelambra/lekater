@@ -15,4 +15,10 @@ export class AdminService {
   addUser(userData:any):Observable<any>{
     return this.http.post(`${this.api}/admin/adduser`, userData)
   }
+  showAllUser():Observable<any>{
+    return this.http.get(`${this.api}/admin/showUsers`)
+  }
+  blockAndUnblockUser(userId:any):Observable<any>{
+    return this.http.patch(`${this.api}/admin/changeStatus`, {userId})
+  }
 }

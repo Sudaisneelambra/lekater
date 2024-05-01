@@ -8,6 +8,7 @@ import { AppRoutingModule } from 'src/app/app-routing.module';
 import { RouterModule } from '@angular/router';
 import { AddUserComponent } from './components/add-user/add-user.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ShowUserComponent } from './components/show-user/show-user.component';
 
 
 
@@ -16,7 +17,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     AdminComponent,
     NavBarComponent,
     HomepageComponent,
-    AddUserComponent
+    AddUserComponent,
+    ShowUserComponent
   ],
   imports: [
     CommonModule,
