@@ -8,6 +8,7 @@ import { UserNavBarComponent } from './components/nav-bar/nav-bar.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { OrdercreationComponent } from './components/homepage/ordercreation/ordercreation.component';
 import { LatestOrderComponent } from './components/homepage/latest-order/latest-order.component';
+import { ConfirmComponent } from 'src/app/components/confirm/confirm.component';
 
 
 
@@ -24,7 +25,8 @@ import { LatestOrderComponent } from './components/homepage/latest-order/latest-
     UserRoutingModule,
     RouterModule,
     FormsModule,
-    ReactiveFormsModule 
+    ReactiveFormsModule,
+    ConfirmComponent
   ]
 })
 export class UserModule { }

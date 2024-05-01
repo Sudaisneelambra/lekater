@@ -20,11 +20,15 @@
             <label class="text-[#a54d4d]" for="Description">Item Description</label>
             <textarea formControlName="itemDescription" name="Description" id="" rows="5" class="w-full px-4 py-2 mb-2  mr-0 md:mr-4 bg-gray-800 text-white border border-gray-700 rounded-md focus:outline-none focus:border-yellow-500" placeholder="Enter the Description"></textarea>
             <label class="text-[#a54d4d]" for="orderingDate">Order Recieved Date</label>
-            <input formControlName="orderReceivedDate" type="date" name="orderingDate" class="w-full h-14 md:w-full px-4 py-2 mb-2  mr-0 md:mr-4 bg-gray-800 text-white border border-gray-700 rounded-md focus:outline-none focus:border-yellow-500" placeholder="Order recived Date"  >
+            <input formControlName="orderReceivedDate" type="date" name="orderingDate" class="w-full h-14 md:w-full px-4 py-2 mb-2  mr-0 md:mr-4 bg-gray-800 text-white border border-gray-700 rounded-md focus:outline-none focus:border-yellow-500"  >
             <label class="text-[#a54d4d]" for="deliveryDate">Expecting Delivery Date</label>
-            <input formControlName="expectingDeliveryDate"  type="date" name="deliveryDate" class="w-full h-14 md:w-full px-4 py-2 mb-2  mr-0 md:mr-4 bg-gray-800 text-white border border-gray-700 rounded-md focus:outline-none focus:border-yellow-500" placeholder="Enter title"  >
-            
-            <button type="submit" class="px-4 md:w-3/6 w-full py-2 text-white md:mt-0 rounded-md bg-yellow-700 hover:bg-yellow-800 focus:outline-none" >Place Order</button>
+            <input formControlName="expectingDeliveryDate"  type="date" name="deliveryDate" class="w-full h-14 md:w-full px-4 py-2 mb-2  mr-0 md:mr-4 bg-gray-800 text-white border border-gray-700 rounded-md focus:outline-none focus:border-yellow-500"  >
+            <div class="flex justify-center items-center w-full  md:w-full px-4 py-2 mb-2  mr-0 md:mr-4 bg-gray-800 text-white border border-gray-700 rounded-md focus:outline-none focus:border-yellow-500">
+                <img src="https://images.unsplash.com/photo-1455390582262-044cdead277a?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8d3JpdGluZyUyMG9uJTIwcGFwZXJ8ZW58MHx8MHx8fDA%3D" alt="dsf">
+            </div>
+            <label class="text-[#a54d4d]" for="image">Choose Image</label>
+            <input formControlName="expectingDeliveryDate"  type="file" name="image" class="w-full h-14 md:w-full px-4 py-2 mb-2  mr-0 md:mr-4 bg-gray-800 text-white border border-gray-700 rounded-md focus:outline-none focus:border-yellow-500"  >
+            <button type="submit" class="px-4 md:w-3/6 w-full py-2 text-white md:mt-4 rounded-md bg-yellow-700 hover:bg-yellow-800 focus:outline-none" >Place Order</button>
           </div>
         </form>
     </div>
