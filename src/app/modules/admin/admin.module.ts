@@ -6,6 +6,8 @@ import { AdminRoutingModule } from './admin-routing.module';
 import { HomepageComponent } from './components/homepage/homepage.component';
 import { AppRoutingModule } from 'src/app/app-routing.module';
 import { RouterModule } from '@angular/router';
+import { AddUserComponent } from './components/add-user/add-user.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -13,12 +15,14 @@ import { RouterModule } from '@angular/router';
   declarations: [
     AdminComponent,
     NavBarComponent,
-    HomepageComponent
+    HomepageComponent,
+    AddUserComponent
   ],
   imports: [
     CommonModule,
     AdminRoutingModule,
-    RouterModule
+    RouterModule,
+    ReactiveFormsModule
   ]
 })
 export class AdminModule { }
