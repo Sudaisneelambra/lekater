@@ -21,4 +21,13 @@ export class AdminService {
   blockAndUnblockUser(userId:any):Observable<any>{
     return this.http.patch(`${this.api}/admin/changeStatus`, {userId})
   }
+  addShop(shopData:any):Observable<any>{
+    return this.http.post(`${this.api}/admin/addshop`, shopData)
+  }
+  showAllShops():Observable<any>{
+    return this.http.get(`${this.api}/admin/showShops`)
+  }
+  deleteAndUndoShops(shopId:any):Observable<any>{
+    return this.http.patch(`${this.api}/admin/deleteUndoShops`, {shopId})
+  }
 }

@@ -4,6 +4,8 @@ import { AdminComponent } from './admin.component';
 import { HomepageComponent } from './components/homepage/homepage.component';
 import { AddUserComponent } from './components/add-user/add-user.component';
 import { ShowUserComponent } from './components/show-user/show-user.component';
+import { AddShopsComponent } from './components/add-shops/add-shops.component';
+import { ShowShopsComponent } from './components/show-shops/show-shops.component';
 
 const routes: Routes = [
   {
@@ -13,6 +15,8 @@ const routes: Routes = [
       { path: 'home', component: HomepageComponent },
       { path: 'addUser', component: AddUserComponent },
       { path: 'showUsers', component: ShowUserComponent },
+      { path: 'addShops', component: AddShopsComponent },
+      { path: 'showShops', component: ShowShopsComponent },
       { path: '', redirectTo: 'home', pathMatch: 'full' },
     ],
   },

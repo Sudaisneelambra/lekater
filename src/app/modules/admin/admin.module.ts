@@ -9,6 +9,8 @@ import { RouterModule } from '@angular/router';
 import { AddUserComponent } from './components/add-user/add-user.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ShowUserComponent } from './components/show-user/show-user.component';
+import { AddShopsComponent } from './components/add-shops/add-shops.component';
+import { ShowShopsComponent } from './components/show-shops/show-shops.component';
 
 
 
@@ -18,7 +20,9 @@ import { ShowUserComponent } from './components/show-user/show-user.component';
     NavBarComponent,
     HomepageComponent,
     AddUserComponent,
-    ShowUserComponent
+    ShowUserComponent,
+    AddShopsComponent,
+    ShowShopsComponent
   ],
   imports: [
     CommonModule,
