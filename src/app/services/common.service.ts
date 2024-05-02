@@ -15,7 +15,22 @@ export class CommonService {
   confirmMessage:BehaviorSubject<string> = new BehaviorSubject<string>('')
 
   confirmationBooleanValue:BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false)
+  loadingbooleanValue:BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false)
 
+  orderingdata:BehaviorSubject<object>= new BehaviorSubject<object>({})
+
+
+  tockendecode() {
+
+    const token = localStorage.getItem('token');
+    if (!token) {
+      return;
+    }
+    const base64Url = token.split('.')[1];
+    const base64 = base64Url.replace('-', '+').replace('_', '/');
+
+    return JSON.parse(window.atob(base64));
+  }
   
 
   login(data:any):Observable<any>{

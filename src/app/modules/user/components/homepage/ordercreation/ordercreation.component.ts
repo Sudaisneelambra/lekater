@@ -62,6 +62,7 @@ export class OrdercreationComponent {
       this.commonservice.confirmationBooleanValue.next(true)
       this.commonservice.confirmMessage.next('Thank you for placing your order with us! Before we proceed, we want to confirm the details of your order')
       console.log(this.orderForm.value);
+      this.commonservice.orderingdata.next(this.orderForm.value)
     } else {
       alert('please fill the all fields')
     }
