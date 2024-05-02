@@ -27,7 +27,6 @@ export class AddShopsComponent {
     if (this.shopForm.valid) {
       this.adminService.addShop(this.shopForm.value).subscribe({
         next: (res) => {
-          console.log(res);
           alert(res.message);
           if (res.success) {
             this.shopForm.reset();
@@ -37,7 +36,6 @@ export class AddShopsComponent {
           console.log(err);
         },
       });
-      console.log('Adding shop:', this.shopForm.value);
     } else {
       this.shopForm.markAllAsTouched();
     }

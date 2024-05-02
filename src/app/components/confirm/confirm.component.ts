@@ -29,24 +29,11 @@ export class ConfirmComponent implements OnInit{
 
   cancellation(){
     this.commonService.confirmationBooleanValue.next(false)
+    this.commonService.confirmMessage.next('')
   }
 
   confirm(){
-    const formdata= new FormData()
-    formdata.append('shopName',this.orderingData.shopName)
-    formdata.append('itemName',this.orderingData.itemName)
-    formdata.append('fabricNameAndCode',this.orderingData.fabricNameAndCode)
-    formdata.append('imageUrl',this.orderingData.imageUrl)
-    formdata.append('itemDescription',this.orderingData.itemDescription)
-    formdata.append('orderReceivedDate',this.orderingData.orderReceivedDate)
-    formdata.append('expectingDeliveryDate',this.orderingData.expectingDeliveryDate)
-    this.userServive.CreateOrder(formdata).subscribe({
-      next:(res)=>{
-
-      },
-      error:(err)=>{
-        
-      }
-    })
+    this.orderingData?.resolve()
+   
   }
 }

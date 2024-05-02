@@ -11,6 +11,8 @@ import { LatestOrderComponent } from './components/homepage/latest-order/latest-
 import { ConfirmComponent } from 'src/app/components/confirm/confirm.component';
 import { LoadingComponent } from 'src/app/components/loading/loading.component';
 import { HttpClientModule } from '@angular/common/http';
+import { ErrorComponent } from 'src/app/components/error/error.component';
+import { SuccessComponent } from 'src/app/components/success/success.component';
 
 
 
@@ -30,6 +32,8 @@ import { HttpClientModule } from '@angular/common/http';
     ReactiveFormsModule,
     ConfirmComponent,
     LoadingComponent,
+    ErrorComponent,
+    SuccessComponent,
     HttpClientModule
   ]
 })

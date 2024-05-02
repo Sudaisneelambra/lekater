@@ -9,10 +9,11 @@
         <form (ngSubmit)="CreateOrder()" [formGroup]="orderForm"  *ngIf="formboolean">
           <div class="flex  lg:flex-row items-center mb-4 gap-2 lg:gap-0 flex-wrap">
             <label class="text-[#a54d4d]" for="shop">Shop Name</label>
-            <select name="shop" formControlName="shopName" class="overflow-hidden w-full h-14 md:w-full px-4 py-2 mb-2 mr-0 md:mr-4 bg-gray-800 text-white border border-gray-700 rounded-md focus:outline-none focus:border-yellow-500" >
-                <option value="" disabled selected class="text-[10px] ">Select The Shop</option>
-                <option *ngFor="let title of titles" [value]="title">{{ title }}</option>
-            </select>
+            <select name="shop" formControlName="shopName" class="overflow-hidden w-full h-14 md:w-full px-4 py-2 mb-2 mr-0 md:mr-4 bg-gray-800 text-white border border-gray-700 rounded-md focus:outline-none focus:border-yellow-500">
+              <option value="" disabled selected >Select The Shop</option>
+              <option *ngFor="let shop of shops" [ngValue]="shop">{{ shop?.shopName }} , {{shop?.location}} , {{shop?.district}}</option>
+          </select>
+          
             <label class="text-[#a54d4d]" for="itemName">Item Name</label>
             <input formControlName="itemName" type="text" name="itemName" class="w-full h-14 md:w-full px-4 py-2 mb-2  mr-0 md:mr-4 bg-gray-800 text-white border border-gray-700 rounded-md focus:outline-none focus:border-yellow-500" placeholder="Enter the Item Name"  >
             <label class="text-[#a54d4d]" for="fabric">Fabric Name & Code </label>

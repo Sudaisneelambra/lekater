@@ -16,7 +16,6 @@ export class ShowShopsComponent implements OnInit {
     this.adminService.showAllShops().subscribe({
       next: (res) => {
         this.shopList = res.allShops;
-        console.log(this.shopList);
       },
       error: (err) => {
         console.log(err);
@@ -24,10 +23,8 @@ export class ShowShopsComponent implements OnInit {
     });
   }
   deleteShop(shopId: any) {
-    console.log(shopId);
     this.adminService.deleteAndUndoShops(shopId).subscribe({
       next: (res) => {
-        console.log(res);
         this.showAllShops()
       },
       error: (err) => {

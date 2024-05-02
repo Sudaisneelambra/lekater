@@ -29,10 +29,8 @@ export class AddUserComponent {
 
   onSubmit() {
     if (this.addUserForm.valid) {
-      console.log(this.addUserForm.value);
       this.adminService.addUser(this.addUserForm.value).subscribe({
         next: (res) => {
-          console.log(res);
           alert(res.message);
           this.addUserForm.reset()
         },

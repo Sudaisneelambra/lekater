@@ -3,9 +3,10 @@ import {
   HttpRequest,
   HttpHandler,
   HttpEvent,
-  HttpInterceptor
+  HttpInterceptor,
+  HttpResponse
 } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { CommonService } from './services/common.service';
 
 @Injectable()
@@ -21,6 +22,17 @@ export class CommonInterceptor implements HttpInterceptor {
         Authorization: `Bearer ${token}`,
       },
     }) 
-    return next.handle(request);
+
+
+    return next.handle(request).pipe(
+      tap((event: HttpEvent<any>) => {
+        if (event instanceof HttpResponse) {
+          if (event.body && event.body.expiry) {
+            alert('JWT Expired. Please login again');
+            this.commonservice.logout();
+          }
+        }
+      })
+    );
   }
 }

@@ -12,6 +12,8 @@ export class UserHomepageComponent implements OnInit{
   
   confirmbooleanValue!:boolean
   loadingbooleanValue!:boolean
+  ErrorbooleanValue!:boolean
+  successbooleanValue!:boolean
 
   ngOnInit() {
     this.commonservice.confirmationBooleanValue.subscribe(value => {
@@ -19,6 +21,12 @@ export class UserHomepageComponent implements OnInit{
     })
     this.commonservice.loadingbooleanValue.subscribe(value => {
       this.loadingbooleanValue=value
+    })
+    this.commonservice.ErrorbooleanValue.subscribe(value => {
+      this.ErrorbooleanValue=value
+    })
+    this.commonservice.successbooleanValue.subscribe(value => {
+      this.successbooleanValue=value
     })
   }
 }
