@@ -40,6 +40,7 @@ export class LoginComponent implements OnInit {
         next: (res) => {
           if(res.success) {
             this.message=res.message
+            localStorage.setItem('token',res.token)
             this.router.navigate(['/user'])
           } else {
             this.errormessage=res.message

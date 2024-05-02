@@ -10,11 +10,15 @@ export class UserHomepageComponent implements OnInit{
 
   constructor(private commonservice:CommonService) {}
   
-  booleanValue!:boolean
+  confirmbooleanValue!:boolean
+  loadingbooleanValue!:boolean
 
   ngOnInit() {
     this.commonservice.confirmationBooleanValue.subscribe(value => {
-      this.booleanValue=value
+      this.confirmbooleanValue=value
+    })
+    this.commonservice.loadingbooleanValue.subscribe(value => {
+      this.loadingbooleanValue=value
     })
   }
 }

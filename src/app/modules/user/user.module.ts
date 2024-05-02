@@ -9,6 +9,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { OrdercreationComponent } from './components/homepage/ordercreation/ordercreation.component';
 import { LatestOrderComponent } from './components/homepage/latest-order/latest-order.component';
 import { ConfirmComponent } from 'src/app/components/confirm/confirm.component';
+import { LoadingComponent } from 'src/app/components/loading/loading.component';
+import { HttpClientModule } from '@angular/common/http';
 
 
 
@@ -26,7 +28,9 @@ import { ConfirmComponent } from 'src/app/components/confirm/confirm.component';
     RouterModule,
     FormsModule,
     ReactiveFormsModule,
-    ConfirmComponent
+    ConfirmComponent,
+    LoadingComponent,
+    HttpClientModule
   ]
 })
 export class UserModule { }
