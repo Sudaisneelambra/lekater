@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, DoCheck } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommonService } from 'src/app/services/common.service';
 
@@ -11,8 +11,11 @@ export class OrdercreationComponent {
   formboolean:boolean=false
   create_button_value='Create Order'
   orderForm!:FormGroup
+  imagePath:any='/assets/images/no-photo-or-blank-image.jpg'
+  imageboolean:boolean=false
 
   constructor(private formBuilder: FormBuilder, private commonservice:CommonService) { }
+ 
 
   ngOnInit(): void {
     this.orderForm = this.formBuilder.group({
@@ -26,11 +29,20 @@ export class OrdercreationComponent {
     });
   }
 
-  OnFileChange(event:any) {
-    if(event.target.files[0].name) {
-      this.orderForm.get('imageUrl')?.setValue(event.target.files[0].name);
+  
+
+  OnFileChange(event: any) {
+    if (event.target.files && event.target.files.length > 0) {
+      const file = event.target.files[0];
+      if (file) {
+        this.orderForm.get('imageUrl')?.setValue(file.name);
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => {
+          this.imagePath = reader.result;
+        };
+      }
     }
-    
   }
 
   ordercreation(){
@@ -48,10 +60,12 @@ export class OrdercreationComponent {
   CreateOrder(){
     if (this.orderForm.valid){
       this.commonservice.confirmationBooleanValue.next(true)
+      this.commonservice.confirmMessage.next('Thank you for placing your order with us! Before we proceed, we want to confirm the details of your order')
       console.log(this.orderForm.value);
     } else {
       alert('please fill the all fields')
     }
     
   }
+
 }
