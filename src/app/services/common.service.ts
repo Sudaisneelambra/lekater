@@ -16,6 +16,8 @@ export class CommonService {
 
   confirmationBooleanValue:BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false)
 
+  
+
   login(data:any):Observable<any>{
     return this.http.post(`${this.api}/user/login`, data)
   }
