@@ -35,7 +35,6 @@ export class LoginComponent implements OnInit {
     this.message=''
     this.loginButton = true;
     if (this.loginForm.valid) {
-      console.log(this.loginForm.value);
       this.commonService.login(this.loginForm.value).subscribe({
         next: (res) => {
           if(res.success) {

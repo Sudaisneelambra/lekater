@@ -16,4 +16,12 @@ export class UserService {
     return this.http.post(`${this.api}/user/createOrder`,data)
   }
 
+  getShops():Observable<any>{
+    return this.http.get(`${this.api}/user/getShops`)
+  }
+
+  getorders():Observable<any>{
+    return this.http.get(`${this.api}/user/getOrder`)
+  }
+
 }
