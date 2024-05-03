@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AdminService } from '../../service/admin.service';
+import { CommonService } from 'src/app/services/common.service';
 
 @Component({
   selector: 'app-add-user',
@@ -12,7 +13,8 @@ export class AddUserComponent {
 
   constructor(
     private formBuilder: FormBuilder,
-    private adminService: AdminService
+    private adminService: AdminService,
+    private commonService: CommonService
   ) {}
 
   ngOnInit() {
@@ -29,13 +31,16 @@ export class AddUserComponent {
 
   onSubmit() {
     if (this.addUserForm.valid) {
+      this.commonService.loadingbooleanValue.next(true);
       this.adminService.addUser(this.addUserForm.value).subscribe({
         next: (res) => {
           alert(res.message);
-          this.addUserForm.reset()
+          this.addUserForm.reset();
+          this.commonService.loadingbooleanValue.next(false);
         },
         error: (err) => {
           console.log(err);
+          this.commonService.loadingbooleanValue.next(false);
         },
       });
     } else {
