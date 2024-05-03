@@ -6,6 +6,7 @@ import { PendingOrdersComponent } from './components/pending-orders/pending-orde
 import { DeliveredOrdersComponent } from './components/delivered-orders/delivered-orders.component';
 import { CancelledOrdersComponent } from './components/cancelled-orders/cancelled-orders.component';
 import { AllOrdersComponent } from './components/all-orders/all-orders.component';
+import { SingleOrderDetailsComponent } from './components/single-order-details/single-order-details.component';
 
 const routes: Routes = [
     {
@@ -18,6 +19,7 @@ const routes: Routes = [
             { path: 'deliveredOrders', component: DeliveredOrdersComponent },
             { path: 'cancelledOrders', component: CancelledOrdersComponent },
             { path: 'allOrders', component: AllOrdersComponent },
+            { path: 'singleorders/:id', component: SingleOrderDetailsComponent },
         ],
       },
 ];
