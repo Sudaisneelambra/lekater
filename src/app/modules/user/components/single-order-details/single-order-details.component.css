@@ -1,0 +1,42 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 20px;
+  }
+  .order-details {
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  .order-details h2 {
+    color: #333;
+    margin-bottom: 20px;
+  }
+  .order-property {
+    margin-bottom: 10px;
+  }
+  .property-label {
+    font-weight: bold;
+  }
+  .property-value {
+    color: #666;
+  }
+
+  button{
+    border: 1px solid gray;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    padding-left: 6px;
+    padding-right: 6px;
+    border-radius: 8px;
+  }
+@media (max-width: 350px) {
+  .order-property1 {
+    flex-direction: column;
+    gap: 10px;
+  }
+}

@@ -7,4 +7,10 @@ import { Component } from '@angular/core';
 })
 export class UserNavBarComponent {
 
+  closeMenu(){
+    const menuCheckbox = document.getElementById('menu-btn') as HTMLInputElement;
+    if (menuCheckbox.checked) {
+      menuCheckbox.checked = false;
+    }
+  }
 }
