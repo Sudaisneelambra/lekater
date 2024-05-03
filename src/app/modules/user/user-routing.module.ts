@@ -2,6 +2,10 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { UserComponent } from './user.component';
 import { UserHomepageComponent } from './components/homepage/homepage.component';
+import { PendingOrdersComponent } from './components/pending-orders/pending-orders.component';
+import { DeliveredOrdersComponent } from './components/delivered-orders/delivered-orders.component';
+import { CancelledOrdersComponent } from './components/cancelled-orders/cancelled-orders.component';
+import { AllOrdersComponent } from './components/all-orders/all-orders.component';
 
 const routes: Routes = [
     {
@@ -10,6 +14,10 @@ const routes: Routes = [
         children: [
             { path: 'home', component: UserHomepageComponent },
             { path: '', redirectTo: 'home', pathMatch: 'full' },
+            { path: 'pendingOrders', component: PendingOrdersComponent },
+            { path: 'deliveredOrders', component: DeliveredOrdersComponent },
+            { path: 'cancelledOrders', component: CancelledOrdersComponent },
+            { path: 'allOrders', component: AllOrdersComponent },
         ],
       },
 ];

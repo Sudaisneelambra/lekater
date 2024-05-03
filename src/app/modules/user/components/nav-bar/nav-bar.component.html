@@ -5,17 +5,11 @@
         <input type="radio" name="slider" id="close-btn">
         <ul class="nav-links">
             <label for="close-btn" class="btn close-btn"><i class="fas fa-times"></i></label>
-            <li><a [routerLink]="'/admin/home'">Home</a></li>
-            <li><a href="#">About</a></li>
-            <li>
-                <a href="#" class="desktop-item">Dropdown Menu</a>
-                
-            </li>
-            <li>
-                <a href="#" class="desktop-item">Mega Menu</a>
-                
-            </li>
-            <li><a href="#">Feedback</a></li>
+            <li><a href="/user/home">Home</a></li>
+            <li><a href="/user/allOrders">All Orders</a></li>
+            <li><a href="/user/pendingOrders" class="desktop-item">Pending Orders</a></li>
+            <li><a href="/user/deliveredOrders" class="desktop-item">Delivered Orders</a></li>
+            <li><a href="/user/cancelledOrders">cancelled Orders</a></li>
         </ul>
         <label for="menu-btn" class="btn menu-btn"><i class="fas fa-bars"></i></label>
     </div>
