@@ -20,7 +20,6 @@ export class AllOrdersComponent implements OnInit{
     this.userService.getAllOrders().subscribe({
       next:(res)=>{
         this.allOrdersList=res?.data
-        console.log(this.allOrdersList);
       },
       error:(err)=>{
         console.log(err);

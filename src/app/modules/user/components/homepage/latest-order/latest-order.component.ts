@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../../services/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-latest-order',
@@ -10,7 +11,7 @@ export class LatestOrderComponent implements OnInit{
 
   latestOrders:any
 
-  constructor(private userservice:UserService) {}
+  constructor(private userservice:UserService, private router:Router) {}
 
   ngOnInit(): void {
 
@@ -29,6 +30,10 @@ export class LatestOrderComponent implements OnInit{
           
         }
       })
+  }
+
+  goToTheSingleOrder(id:any) {
+    this.router.navigate(['/user/singleorders',id])
   }
 
 }
