@@ -8,6 +8,8 @@ import { UserService } from '../../../services/user.service';
 })
 export class LatestOrderComponent implements OnInit{
 
+  latestOrders:any
+
   constructor(private userservice:UserService) {}
 
   ngOnInit(): void {
@@ -18,7 +20,9 @@ export class LatestOrderComponent implements OnInit{
   getorders(){
       this.userservice.getorders().subscribe({
         next:(res)=>{
-          console.log(res?.data);
+          this.latestOrders = res?.data
+          console.log(this.latestOrders);
+          
         },
         error:(err)=>{
           console.log(err);

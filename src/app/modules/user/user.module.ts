@@ -13,6 +13,10 @@ import { LoadingComponent } from 'src/app/components/loading/loading.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ErrorComponent } from 'src/app/components/error/error.component';
 import { SuccessComponent } from 'src/app/components/success/success.component';
+import { PendingOrdersComponent } from './components/pending-orders/pending-orders.component';
+import { DeliveredOrdersComponent } from './components/delivered-orders/delivered-orders.component';
+import { CancelledOrdersComponent } from './components/cancelled-orders/cancelled-orders.component';
+import { AllOrdersComponent } from './components/all-orders/all-orders.component';
 
 
 
@@ -22,7 +26,11 @@ import { SuccessComponent } from 'src/app/components/success/success.component';
     UserHomepageComponent,
     UserNavBarComponent,
     OrdercreationComponent,
-    LatestOrderComponent
+    LatestOrderComponent,
+    PendingOrdersComponent,
+    DeliveredOrdersComponent,
+    CancelledOrdersComponent,
+    AllOrdersComponent
   ],
   imports: [
     CommonModule,

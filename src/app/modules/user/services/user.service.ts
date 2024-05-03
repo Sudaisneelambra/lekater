@@ -24,4 +24,8 @@ export class UserService {
     return this.http.get(`${this.api}/user/getOrder`)
   }
 
+  getAllOrders():Observable<any>{
+    return this.http.get(`${this.api}/user/getAllOrder`)
+  }
+
 }
