@@ -10,11 +10,23 @@ export class UserHomepageComponent implements OnInit{
 
   constructor(private commonservice:CommonService) {}
   
-  booleanValue!:boolean
+  confirmbooleanValue!:boolean
+  loadingbooleanValue!:boolean
+  ErrorbooleanValue!:boolean
+  successbooleanValue!:boolean
 
   ngOnInit() {
     this.commonservice.confirmationBooleanValue.subscribe(value => {
-      this.booleanValue=value
+      this.confirmbooleanValue=value
+    })
+    this.commonservice.loadingbooleanValue.subscribe(value => {
+      this.loadingbooleanValue=value
+    })
+    this.commonservice.ErrorbooleanValue.subscribe(value => {
+      this.ErrorbooleanValue=value
+    })
+    this.commonservice.successbooleanValue.subscribe(value => {
+      this.successbooleanValue=value
     })
   }
 }

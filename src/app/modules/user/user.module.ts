@@ -9,6 +9,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { OrdercreationComponent } from './components/homepage/ordercreation/ordercreation.component';
 import { LatestOrderComponent } from './components/homepage/latest-order/latest-order.component';
 import { ConfirmComponent } from 'src/app/components/confirm/confirm.component';
+import { LoadingComponent } from 'src/app/components/loading/loading.component';
+import { HttpClientModule } from '@angular/common/http';
+import { ErrorComponent } from 'src/app/components/error/error.component';
+import { SuccessComponent } from 'src/app/components/success/success.component';
+import { PendingOrdersComponent } from './components/pending-orders/pending-orders.component';
+import { DeliveredOrdersComponent } from './components/delivered-orders/delivered-orders.component';
+import { CancelledOrdersComponent } from './components/cancelled-orders/cancelled-orders.component';
+import { AllOrdersComponent } from './components/all-orders/all-orders.component';
 
 
 
@@ -18,7 +26,11 @@ import { ConfirmComponent } from 'src/app/components/confirm/confirm.component';
     UserHomepageComponent,
     UserNavBarComponent,
     OrdercreationComponent,
-    LatestOrderComponent
+    LatestOrderComponent,
+    PendingOrdersComponent,
+    DeliveredOrdersComponent,
+    CancelledOrdersComponent,
+    AllOrdersComponent
   ],
   imports: [
     CommonModule,
@@ -26,7 +38,11 @@ import { ConfirmComponent } from 'src/app/components/confirm/confirm.component';
     RouterModule,
     FormsModule,
     ReactiveFormsModule,
-    ConfirmComponent
+    ConfirmComponent,
+    LoadingComponent,
+    ErrorComponent,
+    SuccessComponent,
+    HttpClientModule
   ]
 })
 export class UserModule { }
