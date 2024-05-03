@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AdminService } from '../../service/admin.service';
+import { CommonService } from 'src/app/services/common.service';
 
 @Component({
   selector: 'app-add-shops',
@@ -12,7 +13,8 @@ export class AddShopsComponent {
 
   constructor(
     private formBuilder: FormBuilder,
-    private adminService: AdminService
+    private adminService: AdminService,
+    private commonService: CommonService
   ) {}
 
   ngOnInit(): void {
@@ -25,14 +27,17 @@ export class AddShopsComponent {
 
   addShop() {
     if (this.shopForm.valid) {
+      this.commonService.loadingbooleanValue.next(true);
       this.adminService.addShop(this.shopForm.value).subscribe({
         next: (res) => {
+          this.commonService.loadingbooleanValue.next(false);
           alert(res.message);
           if (res.success) {
             this.shopForm.reset();
           }
         },
         error: (err) => {
+          this.commonService.loadingbooleanValue.next(false);
           console.log(err);
         },
       });

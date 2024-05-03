@@ -11,6 +11,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ShowUserComponent } from './components/show-user/show-user.component';
 import { AddShopsComponent } from './components/add-shops/add-shops.component';
 import { ShowShopsComponent } from './components/show-shops/show-shops.component';
+import { LoadingComponent } from 'src/app/components/loading/loading.component';
 
 
 
@@ -28,7 +29,8 @@ import { ShowShopsComponent } from './components/show-shops/show-shops.component
     CommonModule,
     AdminRoutingModule,
     RouterModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    LoadingComponent
   ]
 })
 export class AdminModule { }
