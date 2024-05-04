@@ -12,4 +12,10 @@ export class NavBarComponent {
     localStorage.clear()
     this.router.navigate([''])
   }
+  closeMenu(){
+    const menuCheckbox = document.getElementById('menu-btn') as HTMLInputElement;
+    if (menuCheckbox.checked) {
+      menuCheckbox.checked = false;
+    }
+  }
 }

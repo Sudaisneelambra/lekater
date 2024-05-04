@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { CommonService } from 'src/app/services/common.service';
 
 @Component({
@@ -7,13 +7,16 @@ import { CommonService } from 'src/app/services/common.service';
   styleUrls: ['./admin.component.css']
 })
 export class AdminComponent implements OnInit{
-  constructor(private commonService:CommonService){}
+  constructor(private commonService:CommonService){
+    this.loadingValue = false;
+  }
   loadingValue!:Boolean;
 
   ngOnInit(): void {
     this.commonService.loadingbooleanValue.subscribe(val=>{
-      this.loadingValue=val;
+      setTimeout(() => {
+        this.loadingValue=val;
+      },0)
     })
   }
-
 }
