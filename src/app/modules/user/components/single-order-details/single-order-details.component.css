@@ -34,7 +34,7 @@ body {
     padding-right: 6px;
     border-radius: 8px;
   }
-@media (max-width: 350px) {
+@media (max-width: 400px) {
   .order-property1 {
     flex-direction: column;
     gap: 10px;

@@ -1,4 +1,4 @@
-import { Component, DoCheck } from '@angular/core';
+import { Component, DoCheck, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommonService } from 'src/app/services/common.service';
 import { UserService } from '../../../services/user.service';
@@ -18,14 +18,18 @@ export class OrdercreationComponent {
   formdata!: FormData;
   file: any;
   shops: Shop[] = [];
-  orderId:any
+  orderId: any;
+  orderdetails: any;
+  filteredshop:any
+
+  @Input() id: any;
 
   constructor(
     private formBuilder: FormBuilder,
     private commonservice: CommonService,
     private userservice: UserService,
     private router: Router,
-    private rout:ActivatedRoute
+    private rout: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
@@ -39,14 +43,15 @@ export class OrdercreationComponent {
       expectingDeliveryDate: ['', Validators.required],
     });
 
-    this.rout.queryParams.subscribe((params) => {
-      this.orderId = params['orderId'];
-      if (this.orderId) {
-        this.getsingleOrder()
-      }
-    })
-
+    // getting shops
     this.getshops();
+
+    // getting single order details for edit form
+    if (this.id) {
+      this.formboolean = true;
+      this.create_button_value = 'Discard Order';
+      this.getsingleOrder();
+    }
   }
 
   // getting latest shops
@@ -54,17 +59,43 @@ export class OrdercreationComponent {
     this.userservice.getShops().subscribe({
       next: (res) => {
         this.shops = res?.data;
-        console.log(this.shops);
+        this.filteredshop=res?.data
       },
       error: (err) => {
         console.log(err);
+        this.commonservice.ErrorbooleanValue.next(true)
+        this.commonservice.errorMessage.next('shop getting failed. Please try again')
       },
     });
   }
 
   // geting single order details
-  getsingleOrder(){
-
+  getsingleOrder() {
+    this.userservice.orderdetail(this.id).subscribe({
+      next: (res) => {
+        this.orderdetails = res.data;
+        this.orderForm.get('shopName')?.setValue(this.orderdetails?.shopName);
+        this.orderForm.get('itemName')?.setValue(this.orderdetails?.itemName);
+        this.orderForm
+          .get('fabricNameAndCode')
+          ?.setValue(this.orderdetails?.fabricNameAndCode);
+        this.orderForm
+          .get('itemDescription')
+          ?.setValue(this.orderdetails?.itemDescription);
+        this.orderForm
+          .get('orderReceivedDate')
+          ?.setValue(this.formatDate(this.orderdetails?.orderReceivedDate));
+        this.orderForm
+          .get('expectingDeliveryDate')
+          ?.setValue(this.formatDate(this.orderdetails?.expectingDeliveryDate));
+        this.imagePath = this.orderdetails?.imageUrl;
+      },
+      error: (err) => {
+        console.log(err);
+        this.commonservice.ErrorbooleanValue.next(true);
+        this.commonservice.errorMessage.next('something went wrong');
+      },
+    });
   }
 
   // file change for image selection
@@ -82,7 +113,7 @@ export class OrdercreationComponent {
     }
   }
 
-
+  // order creation button for form visible oor not visible
   ordercreation() {
     if (!this.formboolean) {
       this.formboolean = true;
@@ -93,11 +124,11 @@ export class OrdercreationComponent {
         'Are you sure you want to discard this order?'
       );
       // const data = this.orderForm.value;
-      let one={}
+      let one = {};
       const promis = new Promise((resolve, reject) => {
         one = {
           resolve,
-        }
+        };
       });
       this.commonservice.orderingdata.next(one);
       promis.then(() => {
@@ -109,6 +140,8 @@ export class OrdercreationComponent {
     }
   }
 
+
+  // creating order
   CreateOrder() {
     if (this.orderForm.valid) {
       this.commonservice.confirmationBooleanValue.next(true);
@@ -144,6 +177,7 @@ export class OrdercreationComponent {
               this.commonservice.successMessage.next(
                 'Order Created Successfully'
               );
+              this.router.navigate(['/']);
               this.orderForm.reset();
               this.file = null;
               this.formboolean = false;
@@ -165,10 +199,92 @@ export class OrdercreationComponent {
       alert('please fill the all fields');
     }
   }
+
+
+  // editOrder
+  editOrder(){
+    if (this.orderForm.valid) {
+      this.commonservice.confirmationBooleanValue.next(true);
+      this.commonservice.confirmMessage.next(
+        'Thank you for placing your order with us! Before we proceed, we want to confirm the details of your order'
+      );
+      const data = this.orderForm.value;
+      data.orderId= this.orderdetails._id
+      const promis = new Promise((resolve, reject) => {
+        data.resolve = resolve;
+      });
+
+      promis.then(() => {
+        this.commonservice.loadingbooleanValue.next(true);
+        this.formdata = new FormData();
+        this.formdata.append('shopName', data.shopName);
+        this.formdata.append('itemName', data.itemName);
+        this.formdata.append('fabricNameAndCode', data.fabricNameAndCode);
+        this.formdata.append('itemDescription', data.itemDescription);
+        this.formdata.append('orderReceivedDate', data.orderReceivedDate);
+        this.formdata.append(
+          'expectingDeliveryDate',
+          data.expectingDeliveryDate
+        );
+        this.formdata.append('imageUrl', this.file);
+        this.formdata.append('orderId', data.orderId);
+
+        this.userservice.editOrder(this.formdata).subscribe({
+          next: (res) => {
+            if (res.success) {
+              this.commonservice.loadingbooleanValue.next(false);
+              this.commonservice.confirmationBooleanValue.next(false);
+              this.commonservice.confirmMessage.next('');
+              this.commonservice.successbooleanValue.next(true);
+              this.commonservice.successMessage.next(
+                'Order Edited Successfully'
+              );
+              this.router.navigate(['/']);
+              this.orderForm.reset();
+              this.file = null;
+              this.formboolean = false;
+            }
+          },
+          error: (err) => {
+            this.commonservice.loadingbooleanValue.next(false);
+            this.commonservice.confirmationBooleanValue.next(false);
+            this.commonservice.ErrorbooleanValue.next(true);
+            this.commonservice.errorMessage.next(
+              'Order editing failed. Please Try Agian.'
+            );
+            console.log(err);
+          },
+        });
+      });
+      this.commonservice.orderingdata.next(data);
+    } else {
+      alert('please fill the all fields');
+    }
+  }
+
+  // convert the date into mm-dd-yyyy formate
+  formatDate(dateString: string): string {
+    const date = new Date(dateString);
+    const year = date.getFullYear();
+    const month = ('0' + (date.getMonth() + 1)).slice(-2);
+    const day = ('0' + date.getDate()).slice(-2);
+    return `${year}-${month}-${day}`;
+  }
+
+  shopname(value:any){
+    this.filtershop(value)
+  }
+
+  // filtering shops for toggle
+  filtershop(value:any){
+    this.filteredshop= this.shops.filter((e)=>{
+      return e.shopName.toLocaleLowerCase().includes(value.toLocaleLowerCase()) 
+    })
+  }
 }
 
 interface Shop {
-  _id:string,
+  _id: string;
   shopName: string;
   district: string;
   location: string;

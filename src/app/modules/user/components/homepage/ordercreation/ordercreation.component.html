@@ -10,13 +10,23 @@
       </button>
 
       <!-- Todo Input -->
-      <form (ngSubmit)="CreateOrder()" [formGroup]="orderForm" *ngIf="formboolean">
+      <form [formGroup]="orderForm" *ngIf="formboolean">
         <div class="flex lg:flex-row items-center mb-4 gap-2 lg:gap-0 flex-wrap">
           <label class="text-[#a54d4d]" for="shop">Shop Name</label>
+
+          <input  type="text" name="itemName"
+            #input
+            (input)="shopname(input.value)"
+            class="w-full !h-10 md:w-full px-2 py-1 mb-2 mr-0 md:mr-4 bg-gray-800 text-white border border-gray-700 rounded-md focus:outline-none focus:border-yellow-500"
+            placeholder="Enter shopName" />
+
           <select name="shop" formControlName="shopName"
             class="overflow-hidden w-full h-14 md:w-full px-4 py-2 mb-2 mr-0 md:mr-4 bg-gray-800 text-white border border-gray-700 rounded-md focus:outline-none focus:border-yellow-500">
             <option value="" disabled selected>Select The Shop</option>
-            <option *ngFor="let shop of shops" [ngValue]="shop?._id">
+            <ng-container *ngIf="filteredshop?.length === 0">
+              <option value="" disabled>No shops available</option>
+            </ng-container>
+            <option *ngFor="let shop of filteredshop" [ngValue]="shop?._id">
               {{ shop?.shopName }} , {{ shop?.location }} , {{ shop?.district }}
             </option>
           </select>
@@ -46,9 +56,19 @@
           <label class="text-[#a54d4d]" for="image">Choose Image</label>
           <input type="file" (change)="OnFileChange($event)" name="image" accept="image/*"
             class="w-full h-14 md:w-full px-4 py-2 mb-2 mr-0 md:mr-4 bg-gray-800 text-white border border-gray-700 rounded-md focus:outline-none focus:border-yellow-500" />
-          <button type="submit"
+          <button
+          *ngIf="!id"
+            (click)="CreateOrder()"
+            type="submit"
             class="px-4 md:w-3/6 w-full py-2 text-white md:mt-4 rounded-md bg-yellow-700 hover:bg-yellow-800 focus:outline-none">
             Place Order
+          </button>
+          <button
+            (click)="editOrder()"
+            *ngIf="id" 
+            type="submit"
+            class="px-4 md:w-3/6 w-full py-2 text-white md:mt-4 rounded-md bg-yellow-700 hover:bg-yellow-800 focus:outline-none">
+            Edit This Order
           </button>
         </div>
       </form>

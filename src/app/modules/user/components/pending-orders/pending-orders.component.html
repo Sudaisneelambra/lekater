@@ -1,1 +1,24 @@
-<p>pending-orders works!</p>
+<div class=" grid place-items-center  bg-gray-900">
+    <!-- Todo List -->  
+    <h1 class=" w-[90%] text-[white] text-[30px] font-bold py-3">All Pending Orders</h1>
+    <div class="flex-col-reverse flex w-[90%]">
+        <!-- Single Todo Item -->
+                <div 
+                class="flex items-center  justify-between bg-gray-800 p-4 mb-4 rounded-md  hover:border hover:border-yellow-700 transition duration-100"
+                *ngFor="let order of allPendingOrdersList"
+                >
+                  <div class="flex flex-col items-center  w-full">
+                    <!-- <input type="checkbox" class="mr-4"> -->
+                    <div class=" w-full ">
+                      <h2 class="text-white font-semibold mb-2"><span class="font-bold text-[red]">SHOP NAME : </span>{{order?.shopdetails[0]?.shopName}} , {{order?.shopdetails[0]?.location}} , {{order?.shopdetails[0]?.district}}</h2>
+                      <p class="text-gray-400">Item Name: {{order?.itemName}}</p>
+                      <p class="text-gray-400">Ordered Date: {{order?.orderReceivedDate | date}}</p>
+                      <p class="text-gray-400">Deliver Date: {{order?.expectingDeliveryDate | date}}</p>
+                    </div>
+                    <div class="mt-4">
+                      <button class="px-8 py-2 bg-red-600 text-white rounded-md hover:bg-red-800 focus:outline-none" (click)="goToTheSingleOrder(order?._id)">View More</button>
+                    </div>
+                  </div>
+                </div>
+          </div>
+</div>

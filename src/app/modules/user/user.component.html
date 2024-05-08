@@ -1,5 +1,8 @@
 <app-usernav-bar></app-usernav-bar>
 <!-- <h1 class="pt-[80px] bg-gray-900 pl-12 text-[30px] text-[white]" style=" font-family: fantasy;">ORDER LIST</h1> -->
+<app-confirm *ngIf="confirmbooleanValue"></app-confirm>
+<app-error *ngIf="ErrorbooleanValue"></app-error>
+<app-success *ngIf="successbooleanValue"></app-success>
 <div class="w-full pt-[70px]">
     <router-outlet class="mt-[80px]"></router-outlet>
 </div>

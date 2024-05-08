@@ -35,8 +35,10 @@ export class LoginComponent implements OnInit {
     this.message=''
     this.loginButton = true;
     if (this.loginForm.valid) {
+      this.commonService.loadingbooleanValue.next(true)
       this.commonService.login(this.loginForm.value).subscribe({
         next: (res) => {
+          this.commonService.loadingbooleanValue.next(false)
           if(res.success) {
             this.message=res.message
             localStorage.setItem('token',res.token)
@@ -46,6 +48,7 @@ export class LoginComponent implements OnInit {
           }
         },
         error: (err) => {
+          this.commonService.loadingbooleanValue.next(false)
           this.errormessage=err.error.message
           console.log(err);
         },

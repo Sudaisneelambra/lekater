@@ -1,4 +1,4 @@
-<div class="order-details">
+<div class="order-details border-2">
     <h2 class=" text-center font-semibold text-[25px] !text-red-600">Order Details</h2>
     <!-- <div class="order-property">
       <span class="property-label">Cancel Status:</span>
@@ -8,66 +8,70 @@
       <span class="property-label">Edited Person:</span>
       <span class="property-value"> </span>
     </div> -->
-    <div class="order-property border-2 py-1">
+    <div class="order-property  py-1">
       <span class="property-label">Item Name : </span>
-      <span class="property-value">sef</span>
+      <span class="property-value">{{singleorderData?.itemName}}</span>
     </div>
-    <div class="order-property border-2 py-1">
-        <span class="property-label">Shop Details:</span>
+    <div class="order-property  py-1">
+        <span class="property-label">Shop Details :</span>
         <span class="property-value">
-            demos shop, palakkad, kerala
+            {{singleorderData?.shopdetails[0]?.shopName}} , {{singleorderData?.shopdetails[0]?.location}} , {{singleorderData?.shopdetails[0]?.district}}
         </span>
       </div>
 
-      <div class="order-property border-2 py-1">
-        <span class="property-label">Fabric Name and Code:</span>
-        <span class="property-value">dsasadd</span>
+      <div class="order-property  py-1">
+        <span class="property-label">Fabric Name and Code :</span>
+        <span class="property-value"> {{singleorderData?.fabricNameAndCode}}</span>
       </div>
       
-      <div class="order-property border-2 py-1">
-          <span class="property-label">Item Description:</span>
-          <span class="property-value">sfdsd</span>
+      <div class="order-property  py-1">
+          <span class="property-label">Item Description : </span>
+          <span class="property-value"> {{singleorderData?.itemDescription}}</span>
         </div>
 
-        <div class="order-property border-2 py-1">
-            <span class="property-label">Order Received Date:</span>
-            <span class="property-value">2024-05-03T00:00:00.000Z</span>
+        <div class="order-property  py-1">
+            <span class="property-label">Order Received Date : </span>
+            <span class="property-value">{{singleorderData?.orderReceivedDate | date}}</span>
           </div>
 
-    <div class="order-property border-2 py-1">
-      <span class="property-label">Expecting Delivery Date:</span>
-      <span class="property-value">2024-05-16T00:00:00.000Z</span>
+    <div class="order-property  py-1">
+      <span class="property-label">Expecting Delivery Date : </span>
+      <span class="property-value">{{singleorderData?.expectingDeliveryDate | date}}</span>
     </div>
     
 
-    <div class="order-property border-2 py-1">
-      <img src="/assets/images/no-photo-or-blank-image.jpg" alt="">
+    <div class="order-property  py-1">
+      <img src="{{singleorderData?.imageUrl}}" alt="">
     </div>
     
-    <div class="order-property border-2 py-1">
-      <span class="property-label">Order Received By:</span>
-      <span class="property-value">sudais</span>
+    <div class="order-property  py-1">
+      <span class="property-label">Order Received By : </span>
+      <span class="property-value">{{singleorderData?.orderRecivedBy}}</span>
     </div>
 
-    <div class="order-property border-2 py-1">
-      <span class="property-label">Order Delivery Status:</span>
-      <span class="property-value">false</span>
+    <div class="order-property  py-1">
+      <span class="property-label">Order Delivery Status : </span>
+      <span class="property-value">{{singleorderData?.orderDeliveriedStatus}}</span>
     </div>
 
-    <div class="order-property border-2 py-1">
-        <span class="property-label">Order edit Status:</span>
-        <span class="property-value">false</span>
+    <div class="order-property  py-1">
+        <span class="property-label">Order edit Status : </span>
+        <span class="property-value">{{singleorderData?.editstatus}}</span>
       </div>
       
-      <div class="order-property border-2 py-1">
-        <span class="property-label">Order edited by :</span>
-        <span class="property-value">false</span>
+      <div class="order-property  py-1">
+        <span class="property-label">Order edited by : </span>
+        <span class="property-value">{{singleorderData?.editedperson ? singleorderData?.editedperson : 'No Edites ' }}</span>
+      </div>
+      <div class="order-property  py-1">
+        <span class="property-label">Order edited Date : </span>
+        <span class="property-value">{{singleorderData?.EditDate ? (singleorderData.EditDate | date) : 'No Edites '  }}</span>
       </div>
  
 
-      <div class="order-property1 border-2 flex !justify-around py-2">
-        <button>dshfuah</button>
-        <button>dshfuah</button>
-        <button>dshfuah</button>
+      <div class="order-property1  flex !justify-around py-2" *ngIf="!singleorderData?.orderDeliveriedStatus && !singleorderData?.cancelStatus">
+        <button class="bg-blue-500 text-white hover:bg-blue-600" (click)="deliveried(singleorderData?._id)" >Place Order</button>
+        <button class="bg-yellow-500 text-white hover:bg-yellow-600" (click)="edit(singleorderData?._id)">Edit</button>
+        <button class="bg-red-500 text-white hover:bg-red-600" (click)="cancel(singleorderData?._id)">Cancel Order</button>
       </div>
   </div>
