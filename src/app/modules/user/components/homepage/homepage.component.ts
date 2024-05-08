@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonService } from 'src/app/services/common.service';
+import { UserService } from '../../services/user.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-homepage',
@@ -8,25 +10,17 @@ import { CommonService } from 'src/app/services/common.service';
 })
 export class UserHomepageComponent implements OnInit{
 
-  constructor(private commonservice:CommonService) {}
-  
-  confirmbooleanValue!:boolean
-  loadingbooleanValue!:boolean
-  ErrorbooleanValue!:boolean
-  successbooleanValue!:boolean
+  constructor(private userservice:UserService, private activatedrout:ActivatedRoute) {}
 
-  ngOnInit() {
-    this.commonservice.confirmationBooleanValue.subscribe(value => {
-      this.confirmbooleanValue=value
-    })
-    this.commonservice.loadingbooleanValue.subscribe(value => {
-      this.loadingbooleanValue=value
-    })
-    this.commonservice.ErrorbooleanValue.subscribe(value => {
-      this.ErrorbooleanValue=value
-    })
-    this.commonservice.successbooleanValue.subscribe(value => {
-      this.successbooleanValue=value
+  id:any
+
+  ngOnInit(): void {
+    this.activatedrout.queryParams.subscribe(params=>{ 
+      if(params['id']){
+        this.id=params['id']
+        
+      }
     })
   }
+
 }

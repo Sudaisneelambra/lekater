@@ -8,6 +8,7 @@ import { LoginComponent } from './components/login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { CommonInterceptor } from './common.interceptor';
+import { LoadingComponent } from './components/loading/loading.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { CommonInterceptor } from './common.interceptor';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    LoadingComponent
   ],
   providers: [
     {
