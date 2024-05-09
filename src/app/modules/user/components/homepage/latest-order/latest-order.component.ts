@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, DoCheck, Input, OnInit } from '@angular/core';
 import { UserService } from '../../../services/user.service';
 import { Router } from '@angular/router';
 
@@ -7,15 +7,24 @@ import { Router } from '@angular/router';
   templateUrl: './latest-order.component.html',
   styleUrls: ['./latest-order.component.css']
 })
-export class LatestOrderComponent implements OnInit{
+export class LatestOrderComponent implements OnInit, DoCheck{
 
   latestOrders:any
+  @Input() order:any
 
   constructor(private userservice:UserService, private router:Router) {}
+ 
 
   ngOnInit(): void {
 
     this.getorders()
+  }
+
+  ngDoCheck(): void {
+    if(this.order===false){
+      this.getorders()
+      this.order=true
+    }
   }
 
   getorders(){

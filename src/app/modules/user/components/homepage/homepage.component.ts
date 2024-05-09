@@ -13,7 +13,7 @@ export class UserHomepageComponent implements OnInit{
   constructor(private userservice:UserService, private activatedrout:ActivatedRoute) {}
 
   id:any
-
+  booleanValue:any
   ngOnInit(): void {
     this.activatedrout.queryParams.subscribe(params=>{ 
       if(params['id']){
@@ -21,6 +21,11 @@ export class UserHomepageComponent implements OnInit{
         
       }
     })
+  }
+
+  eventhandle(event:any){
+    console.log(event);
+    this.booleanValue=event
   }
 
 }

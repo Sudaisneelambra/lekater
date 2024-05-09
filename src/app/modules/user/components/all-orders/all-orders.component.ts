@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { Router } from '@angular/router';
+import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
+import { Subject } from 'rxjs';
+
 
 @Component({
   selector: 'app-all-orders',
@@ -9,20 +12,54 @@ import { Router } from '@angular/router';
 })
 export class AllOrdersComponent implements OnInit{
 
-  allOrdersList:any[]=[]
-  filteredlist:any
+  // allOrdersList:any[]=[]
+  filteredlist:OrderDetail[]=[]
+  page:number=1
+  lengthOfOrder!:number
+  searchedlength!:number
+  searchedlist:OrderDetail[]=[]
+  private searchTerms = new Subject<string>();
 
-  constructor(private userService:UserService, private router:Router) {}
+
+  constructor(private userService:UserService, private router:Router) {
+    this.searchTerms.pipe(
+      debounceTime(2000), 
+      distinctUntilChanged(),
+      switchMap((term: string) => this.userService.searchTerms(term,this.page))).subscribe({
+        next:(res)=>{
+          this.searchedlength=res.searchedlength
+          this.searchedlist=res.data
+        },
+        error:(err)=>{
+          console.log(err);
+        }
+      })
+  }
 
   ngOnInit(): void {
     this.getAllOrders()
+    this.getlengthofaorders()
   }
 
+  // get all orders
   getAllOrders(){
-    this.userService.getAllOrders().subscribe({
+    this.userService.getAllOrders(this.page).subscribe({
       next:(res)=>{
-        this.allOrdersList=res?.data
         this.filteredlist=res?.data
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      },
+      error:(err)=>{
+        console.log(err);
+      }
+    })
+  }
+
+  // get allrders length
+  getlengthofaorders(){
+    this.userService.getlengthofallorder().subscribe({
+      next:(res)=>{
+        this.lengthOfOrder=res?.data
+        console.log(this.lengthOfOrder);
       },
       error:(err)=>{
         console.log(err);
@@ -36,9 +73,56 @@ export class AllOrdersComponent implements OnInit{
 
   // searching order
   search(value:any){
-    
-    this.filteredlist= this.allOrdersList.filter((e:any)=>{
-      return e.shopdetails[0]?.shopName?.toLocaleLowerCase()?.includes(value?.toLocaleLowerCase()) 
-    })
+    if(value.trim()==''){
+      this.getAllOrders()
+    } else {
+      this.searchTerms.next(value)
+    }
+  }
+
+  next(){
+    this.page+=1
+    this.getAllOrders()
+  }
+
+  prev(){
+    this.page-=1
+    this.getAllOrders()
+  }
+
+  nextbuttonshowfunction(){
+    if(Math.floor(this.lengthOfOrder/10)>=this.page){
+      return true
+    } else {
+      return false
+    }
   }
 }
+
+interface OrderDetail {
+  _id?: string;
+  deliveredDate?: Date;
+  cancelStatus?: boolean;
+  editedPerson: string;
+  editStatus: boolean;
+  expectingDeliveryDate: Date;
+  fabricNameAndCode: string;
+  imageUrl: string;
+  itemDescription: string;
+  itemName: string;
+  orderDeliveredStatus: boolean;
+  orderReceivedDate: Date;
+  orderReceivedBy: string;
+  orderReceivedStatus: boolean;
+  shopName: string;
+  shopdetails?: Shopdetail[];
+}
+
+interface Shopdetail {
+  shopName: string;
+  location: string;
+  district: string;
+  deleteStatus: boolean;
+  _id: string;
+}
+

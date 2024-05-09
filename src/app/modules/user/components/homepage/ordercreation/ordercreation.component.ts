@@ -1,4 +1,4 @@
-import { Component, DoCheck, Input } from '@angular/core';
+import { Component, DoCheck, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommonService } from 'src/app/services/common.service';
 import { UserService } from '../../../services/user.service';
@@ -21,8 +21,10 @@ export class OrdercreationComponent {
   orderId: any;
   orderdetails: any;
   filteredshop:any
+  @Output() reloadevent= new EventEmitter<any>()
 
   @Input() id: any;
+
 
   constructor(
     private formBuilder: FormBuilder,
@@ -123,7 +125,6 @@ export class OrdercreationComponent {
       this.commonservice.confirmMessage.next(
         'Are you sure you want to discard this order?'
       );
-      // const data = this.orderForm.value;
       let one = {};
       const promis = new Promise((resolve, reject) => {
         one = {
@@ -136,6 +137,8 @@ export class OrdercreationComponent {
         this.commonservice.confirmationBooleanValue.next(false);
         this.formboolean = false;
         this.create_button_value = 'Create Order';
+        this.id=null
+        this.router.navigate(['/user/home'])
       });
     }
   }
@@ -177,10 +180,12 @@ export class OrdercreationComponent {
               this.commonservice.successMessage.next(
                 'Order Created Successfully'
               );
-              this.router.navigate(['/']);
+              this.reloadevent.emit(false)
               this.orderForm.reset();
               this.file = null;
               this.formboolean = false;
+              this.create_button_value='Create Order'
+              this.imagePath = '/assets/images/no-photo-or-blank-image.jpg';
             }
           },
           error: (err) => {
@@ -239,10 +244,13 @@ export class OrdercreationComponent {
               this.commonservice.successMessage.next(
                 'Order Edited Successfully'
               );
-              this.router.navigate(['/']);
+              this.reloadevent.emit(false)
+              this.imagePath = '/assets/images/no-photo-or-blank-image.jpg';
+              this.create_button_value='Create Order'
               this.orderForm.reset();
               this.file = null;
               this.formboolean = false;
+              this.id=null
             }
           },
           error: (err) => {

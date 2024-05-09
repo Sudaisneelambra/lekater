@@ -9,7 +9,6 @@ import { environment } from 'src/environment/environment.prod';
 export class UserService {
 
   api = environment.api;
-  latestorders:any
 
   constructor(private http:HttpClient) { }
 
@@ -17,7 +16,7 @@ export class UserService {
     return this.http.post(`${this.api}/user/createOrder`,data)
   }
   editOrder(data:any):Observable<any>{
-    return this.http.post(`${this.api}/user/editOrder`,data)
+    return this.http.patch(`${this.api}/user/editOrder`,data)
   }
 
   getShops():Observable<any>{
@@ -28,8 +27,8 @@ export class UserService {
     return this.http.get(`${this.api}/user/getOrder`)
   }
 
-  getAllOrders():Observable<any>{
-    return this.http.get(`${this.api}/user/getAllOrder`)
+  getAllOrders(skip:any):Observable<any>{
+    return this.http.post(`${this.api}/user/getAllOrder`,{skip})
   }
 
   getsingleorderdetails(id:any):Observable<any>{
@@ -58,6 +57,14 @@ export class UserService {
 
   orderdetail(id:any):Observable<any>{
     return this.http.get(`${this.api}/user/orderdetail/${id}`)
+  }
+
+  getlengthofallorder():Observable<any>{
+    return this.http.get(`${this.api}/user/getorderlength`)
+  }
+
+  searchTerms(value:any,page:any):Observable<any>{
+    return this.http.get(`${this.api}/user/getsearchallorder?searchValue=${value}&page=${page}`)
   }
 
 }
