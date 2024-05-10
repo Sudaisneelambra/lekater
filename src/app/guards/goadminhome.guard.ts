@@ -5,10 +5,10 @@ import { CommonService } from '../services/common.service';
 export const goadminhomeGuard: CanActivateFn = (route, state) => {
 
   const token =inject(CommonService).tockendecode()
-  if(token && token.type =='admin'){
+  if(token && token.type){
     return true
     
-  } else if (token && token.type =='user'){
+  } else if (token && !token.type){
     inject(Router).navigate(['user/home'])
     return true
   } else {

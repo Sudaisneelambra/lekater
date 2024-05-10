@@ -9,8 +9,11 @@ nav {
   position: fixed;
   z-index: 99;
   width: 100%;
+  background: #ffffff;
+}
 
-  background: #242526;
+.logoimage{
+  background-blend-mode: multiply;
 }
 nav .wrapper {
   position: relative;
@@ -36,7 +39,7 @@ nav .wrapper {
   list-style: none;
 }
 .nav-links li a {
-  color: #f2f2f2;
+  color: #000000;
   text-decoration: none;
   font-size: 18px;
   font-weight: 500;
@@ -45,7 +48,8 @@ nav .wrapper {
   transition: all 0.3s ease;
 }
 .nav-links li a:hover {
-  background: #3a3b3c;
+  color: red;
+  transition: .2s ease;
 }
 .nav-links .mobile-item {
   display: none;

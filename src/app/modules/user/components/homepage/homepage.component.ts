@@ -24,7 +24,6 @@ export class UserHomepageComponent implements OnInit{
   }
 
   eventhandle(event:any){
-    console.log(event);
     this.booleanValue=event
   }
 

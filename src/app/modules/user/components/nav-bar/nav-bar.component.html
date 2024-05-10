@@ -1,6 +1,6 @@
 <nav>
     <div class="wrapper">
-        <div class="logo"><a href="#">Logo</a></div>
+        <div class="logo"><a [routerLink]="'/user/home'"><img class="logoimage h-[50px]" src="/assets/images/images__1_-removebg-preview.png" alt=""></a></div>
         <input type="radio" name="slider" id="menu-btn">
         <input type="radio" name="slider" id="close-btn">
         <ul class="nav-links">
@@ -12,6 +12,6 @@
             <li><a [routerLink]="'/user/cancelledOrders'"  (click)="closeMenu()">cancelled Orders</a></li>
             <li><a [routerLink]="'/user/cancelledOrders'"  (click)="logout()">Logout</a></li>
         </ul>
-        <label for="menu-btn" class="btn menu-btn"><i class="fas fa-bars"></i></label>
+        <label for="menu-btn" class="btn menu-btn"><i class="fas fa-bars text-[black]"></i></label>
     </div>
 </nav>

@@ -18,7 +18,6 @@ export class SingleOrderDetailsComponent implements OnInit{
   ngOnInit(): void {
     this.rout.paramMap.subscribe(
       (params)=>{
-        console.log(params.get('id'));
         this.id=params.get('id')
         if( this.id) {
           this.singleorderdetails(this.id)
@@ -32,7 +31,6 @@ export class SingleOrderDetailsComponent implements OnInit{
       next:(res)=>{
         if(res.data){
           this.singleorderData=res?.data[0]
-          console.log(this.singleorderData);
         }
       },
       error:(err)=>{
@@ -62,7 +60,6 @@ export class SingleOrderDetailsComponent implements OnInit{
                 this.commonservice.successbooleanValue.next(true)
                 this.commonservice.successMessage.next('order deliverying is successfull')
                 this.router.navigate(['/'])
-                console.log(res);
               } else{
                 this.commonservice.loadingbooleanValue.next(false)
                 this.commonservice.confirmationBooleanValue.next(false)
@@ -104,7 +101,6 @@ export class SingleOrderDetailsComponent implements OnInit{
                 this.commonservice.successbooleanValue.next(true)
                 this.commonservice.successMessage.next('order cancelled successfull')
                 this.router.navigate(['/'])
-                console.log(res);
               } else{
                 this.commonservice.loadingbooleanValue.next(false)
                 this.commonservice.confirmationBooleanValue.next(false)

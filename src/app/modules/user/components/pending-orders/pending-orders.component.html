@@ -1,14 +1,22 @@
 <div class=" grid place-items-center  bg-gray-900">
     <!-- Todo List -->  
     <h1 class=" w-[90%] text-[white] text-[30px] font-bold py-3">All Pending Orders</h1>
+    <div class=" w-[90%] flex bg-gray-300 text-gray-900 border border-gray-700 items-center overflow-hidden mb-2 rounded-md focus:outline-none outline-none ">
+        <input  type="text" name="itemName"
+        (keyup.enter)="search(input.value)"
+        (input)="search(input.value)"
+        #input
+        class="w-full !h-10 md:w-[100%]  bg-gray-300 outline-none px-2  mr-0 "
+        placeholder="Enter shop Name" />
+        <img class="h-8 pr-2" src="/assets/images/search-interface-symbol (1).png" alt="" (click)="search(input.value)" >
+      </div>
     <div class="flex-col-reverse flex w-[90%]">
-        <!-- Single Todo Item -->
+        <ng-container *ngIf="allPendingOrdersList && allPendingOrdersList?.[0]; else nodata">
                 <div 
                 class="flex items-center  justify-between bg-gray-800 p-4 mb-4 rounded-md  hover:border hover:border-yellow-700 transition duration-100"
                 *ngFor="let order of allPendingOrdersList"
                 >
                   <div class="flex flex-col items-center  w-full">
-                    <!-- <input type="checkbox" class="mr-4"> -->
                     <div class=" w-full ">
                       <h2 class="text-white font-semibold mb-2"><span class="font-bold text-[red]">SHOP NAME : </span>{{order?.shopdetails[0]?.shopName}} , {{order?.shopdetails[0]?.location}} , {{order?.shopdetails[0]?.district}}</h2>
                       <p class="text-gray-400">Item Name: {{order?.itemName}}</p>
@@ -20,5 +28,24 @@
                     </div>
                   </div>
                 </div>
+            </ng-container>
+            <ng-template #nodata>
+              <div class="flex flex-col items-center  w-full">
+                <div class=" w-full ">
+                  <h2 class="text-white font-semibold mb-2">No Data Found</h2>
+                </div>
+              </div>
+            </ng-template>
+          </div>
+          <div class="flex gap-3">
+            <div class="my-2" *ngIf="length > 10 && page !==1">
+              <h1><button class="px-3 py-1 border bg-[#ff000085] rounded-lg text-[white]" (click)="prev()">Prev</button></h1>
+            </div>
+            <div class="my-2" *ngIf="nextbuttonshowfunction()">
+              <h1><button class="px-3 py-1 border bg-[#ff000085] rounded-lg text-[white]" (click)="next()">Next</button></h1>
+            </div>
+          </div>
+          <div class="mb-4 mt-2 pagination-info" *ngIf="allPendingOrdersList && allPendingOrdersList?.[0]">
+            Page : {{ page }}
           </div>
 </div>

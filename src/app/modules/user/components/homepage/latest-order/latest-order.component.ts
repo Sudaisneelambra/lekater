@@ -31,8 +31,6 @@ export class LatestOrderComponent implements OnInit, DoCheck{
       this.userservice.getorders().subscribe({
         next:(res)=>{
           this.latestOrders = res?.data
-          console.log(this.latestOrders);
-          
         },
         error:(err)=>{
           console.log(err);
