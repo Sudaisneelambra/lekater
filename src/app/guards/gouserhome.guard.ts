@@ -5,10 +5,10 @@ import { inject } from '@angular/core';
 export const gouserhomeGuard: CanActivateFn = (route, state) => {
   
   const token =inject(CommonService).tockendecode()
-  if(token && token.type =='user'){
+  if(token && !token.type || token.type){
     return true
     
-  } else if (token && token.type =='admin'){
+  } else if (token && token.type ){
     inject(Router).navigate(['admin/home'])
     return true
   } else {

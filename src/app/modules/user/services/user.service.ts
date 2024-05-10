@@ -43,12 +43,12 @@ export class UserService {
     return this.http.patch(`${this.api}/user/cancelorder/${id}`,{})
   }
 
-  allDeliveredOrders():Observable<any>{
-    return this.http.get(`${this.api}/user/allDeliveredOrders`)
+  allDeliveredOrders(page:any):Observable<any>{
+    return this.http.post(`${this.api}/user/allDeliveredOrders`,{page})
   }
 
-  allPendingOrders():Observable<any>{
-    return this.http.get(`${this.api}/user/allPendingOrders`)
+  allPendingOrders(page:any):Observable<any>{
+    return this.http.post(`${this.api}/user/allPendingOrders`,{page})
   }
 
   allCancelOrder():Observable<any>{
@@ -59,12 +59,16 @@ export class UserService {
     return this.http.get(`${this.api}/user/orderdetail/${id}`)
   }
 
-  getlengthofallorder():Observable<any>{
-    return this.http.get(`${this.api}/user/getorderlength`)
+  searchallorder(value:any,page:any):Observable<any>{
+    return this.http.get(`${this.api}/user/getsearchallorder?searchValue=${value}&page=${page}`)
   }
 
-  searchTerms(value:any,page:any):Observable<any>{
-    return this.http.get(`${this.api}/user/getsearchallorder?searchValue=${value}&page=${page}`)
+  searchpendingOrder(value:any, page:any) :Observable<any> {
+    return this.http.get(`${this.api}/user/getsearchpendingorder?searchValue=${value}&page=${page}`)
+  }
+
+  searchdeliveredOrder(value:any, page:any) :Observable<any> {
+    return this.http.get(`${this.api}/user/getsearchdeliveredorder?searchValue=${value}&page=${page}`)
   }
 
 }

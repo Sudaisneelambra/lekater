@@ -42,7 +42,12 @@ export class LoginComponent implements OnInit {
           if(res.success) {
             this.message=res.message
             localStorage.setItem('token',res.token)
-            this.router.navigate(['/user'])
+            const token =this.commonService.tockendecode()
+            if(token.type){
+              this.router.navigate(['/admin'])
+            } else {
+              this.router.navigate(['/user'])
+            }
           } else {
             this.errormessage=res.message
           }

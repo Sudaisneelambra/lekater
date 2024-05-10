@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { Router } from '@angular/router';
-import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
-import { Subject } from 'rxjs';
+import { debounceTime, distinctUntilChanged, skipWhile, switchMap } from 'rxjs/operators';
+import { Subject, forkJoin, of } from 'rxjs';
 
 
 @Component({
@@ -12,7 +12,6 @@ import { Subject } from 'rxjs';
 })
 export class AllOrdersComponent implements OnInit{
 
-  // allOrdersList:any[]=[]
   filteredlist:OrderDetail[]=[]
   page:number=1
   lengthOfOrder!:number
@@ -25,10 +24,17 @@ export class AllOrdersComponent implements OnInit{
     this.searchTerms.pipe(
       debounceTime(2000), 
       distinctUntilChanged(),
-      switchMap((term: string) => this.userService.searchTerms(term,this.page))).subscribe({
+      switchMap((term: string) => {
+        if (term.trim() === '') {
+          return userService.getAllOrders(this.page)
+        } else {
+          return this.userService.searchallorder(term, this.page); 
+        }
+
+      })).subscribe({
         next:(res)=>{
-          this.searchedlength=res.searchedlength
-          this.searchedlist=res.data
+          this.lengthOfOrder=res.searchedlength
+          this.filteredlist=res.data
         },
         error:(err)=>{
           console.log(err);
@@ -38,7 +44,6 @@ export class AllOrdersComponent implements OnInit{
 
   ngOnInit(): void {
     this.getAllOrders()
-    this.getlengthofaorders()
   }
 
   // get all orders
@@ -46,6 +51,7 @@ export class AllOrdersComponent implements OnInit{
     this.userService.getAllOrders(this.page).subscribe({
       next:(res)=>{
         this.filteredlist=res?.data
+        this.lengthOfOrder=res.searchedlength
         window.scrollTo({ top: 0, behavior: 'smooth' });
       },
       error:(err)=>{
@@ -54,42 +60,31 @@ export class AllOrdersComponent implements OnInit{
     })
   }
 
-  // get allrders length
-  getlengthofaorders(){
-    this.userService.getlengthofallorder().subscribe({
-      next:(res)=>{
-        this.lengthOfOrder=res?.data
-        console.log(this.lengthOfOrder);
-      },
-      error:(err)=>{
-        console.log(err);
-      }
-    })
-  }
 
+  // got single orders
   goToTheSingleOrder(id:any) {
     this.router.navigate(['/user/singleorders',id])
   }
 
   // searching order
   search(value:any){
-    if(value.trim()==''){
-      this.getAllOrders()
-    } else {
+      this.lengthOfOrder=0
       this.searchTerms.next(value)
-    }
   }
 
+  // pagination next
   next(){
     this.page+=1
     this.getAllOrders()
   }
 
+  // pagenation prev
   prev(){
     this.page-=1
     this.getAllOrders()
   }
 
+  // pagenation next button show boolean
   nextbuttonshowfunction(){
     if(Math.floor(this.lengthOfOrder/10)>=this.page){
       return true

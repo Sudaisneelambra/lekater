@@ -32,7 +32,6 @@
                 </ng-container>
                 <ng-template #nodata>
                   <div class="flex flex-col items-center  w-full">
-                    <!-- <input type="checkbox" class="mr-4"> -->
                     <div class=" w-full ">
                       <h2 class="text-white font-semibold mb-2">No Data Found</h2>
                     </div>
@@ -47,7 +46,7 @@
                   <h1><button class="px-3 py-1 border bg-[#ff000085] rounded-lg text-[white]" (click)="next()">Next</button></h1>
                 </div>
               </div>
-              <div class="mb-4 mt-2 pagination-info">
+              <div class="mb-4 mt-2 pagination-info" *ngIf="filteredlist && filteredlist?.[0]">
                 Page : {{ page }}
               </div>
 </div>

@@ -13,6 +13,7 @@ const routes: Routes = [
   },
   {
     path: 'admin',
+    canActivate:[goadminhomeGuard],
     loadChildren: () =>
       import('./modules/admin/admin.module').then((e) => e.AdminModule),
   },
