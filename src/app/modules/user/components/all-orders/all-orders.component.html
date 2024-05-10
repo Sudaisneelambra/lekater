@@ -12,15 +12,14 @@
     <img class="h-8 pr-2" src="/assets/images/search-interface-symbol (1).png" alt="" (click)="search(input.value)" >
   </div>
   <div class="flex-col-reverse flex w-[90%]">
-               <ng-container *ngIf="filteredlist && filteredlist?.length>0 ; else nodata">
+               <ng-container *ngIf="filteredlist && filteredlist?.[0]; else nodata">
                   <div 
                   class="flex items-center  justify-between bg-gray-800 p-4 mb-4 rounded-md  hover:border hover:border-yellow-700 transition duration-100"
-                  *ngFor="let order of filteredlist"
+                  *ngFor="let order of filteredlist; let i =index"
                   >
                     <div class="flex flex-col items-center  w-full">
-                      <!-- <input type="checkbox" class="mr-4"> -->
                       <div class=" w-full ">
-                        <h2 class="text-white font-semibold mb-2"><span class="font-bold text-[red]">SHOP NAME : </span>{{order?.shopdetails[0]?.shopName}} , {{order?.shopdetails[0]?.location}} , {{order?.shopdetails[0]?.district}}</h2>
+                        <h2 class="text-white font-semibold mb-2"><span class="font-bold text-[red]">SHOP NAME : </span>{{order?.shopdetails?.[0]?.shopName}} , {{order?.shopdetails?.[0]?.location}} , {{order?.shopdetails?.[0]?.district}}</h2>
                         <p class="text-gray-400">Item Name: {{order?.itemName}}</p>
                         <p class="text-gray-400">Ordered Date: {{order?.orderReceivedDate | date}}</p>
                         <p class="text-gray-400">Deliver Date: {{order?.expectingDeliveryDate | date}}</p>
@@ -30,14 +29,25 @@
                       </div>
                     </div>
                   </div>
-               </ng-container>
-               <ng-template #nodata>
-                <div class="flex flex-col items-center  w-full">
-                  <!-- <input type="checkbox" class="mr-4"> -->
-                  <div class=" w-full ">
-                    <h2 class="text-white font-semibold mb-2">No Data Found</h2>
+                </ng-container>
+                <ng-template #nodata>
+                  <div class="flex flex-col items-center  w-full">
+                    <!-- <input type="checkbox" class="mr-4"> -->
+                    <div class=" w-full ">
+                      <h2 class="text-white font-semibold mb-2">No Data Found</h2>
+                    </div>
+                  </div>
+                </ng-template>
+              </div>
+              <div class="flex gap-3">
+                <div class="my-2" *ngIf="lengthOfOrder > 10 && page !==1">
+                  <h1><button class="px-3 py-1 border bg-[#ff000085] rounded-lg text-[white]" (click)="prev()">Prev</button></h1>
                 </div>
+                <div class="my-2" *ngIf="nextbuttonshowfunction()">
+                  <h1><button class="px-3 py-1 border bg-[#ff000085] rounded-lg text-[white]" (click)="next()">Next</button></h1>
                 </div>
-              </ng-template>
-          </div>
+              </div>
+              <div class="mb-4 mt-2 pagination-info">
+                Page : {{ page }}
+              </div>
 </div>
