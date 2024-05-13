@@ -17,7 +17,9 @@ export class ShowShopsComponent implements OnInit {
     this.showAllShops();
   }
   showAllShops() {
-    this.commonService.loadingbooleanValue.next(true);
+    setTimeout(() => {
+      this.commonService.loadingbooleanValue.next(true); 
+    },0);
     this.adminService.showAllShops().subscribe({
       next: (res) => {
         this.commonService.loadingbooleanValue.next(false);
@@ -29,8 +31,11 @@ export class ShowShopsComponent implements OnInit {
       },
     });
   }
+
   deleteShop(shopId: any) {
-    this.commonService.loadingbooleanValue.next(true);
+    setTimeout(() => {
+      this.commonService.loadingbooleanValue.next(true); 
+    },0);
     this.adminService.deleteAndUndoShops(shopId).subscribe({
       next: (res) => {
         this.showAllShops();

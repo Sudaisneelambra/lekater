@@ -100,7 +100,7 @@ export class SingleOrderDetailsComponent implements OnInit{
                 this.commonservice.confirmationBooleanValue.next(false)
                 this.commonservice.successbooleanValue.next(true)
                 this.commonservice.successMessage.next('order cancelled successfull')
-                this.router.navigate(['/'])
+                this.router.navigate(['/user/home'])
               } else{
                 this.commonservice.loadingbooleanValue.next(false)
                 this.commonservice.confirmationBooleanValue.next(false)

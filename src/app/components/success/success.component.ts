@@ -19,6 +19,7 @@ export class SuccessComponent implements OnInit{
       this.message=value
     })
   }
+  
   Done(){
     this.commonservice.successbooleanValue.next(false)
     this.commonservice.successMessage.next('')

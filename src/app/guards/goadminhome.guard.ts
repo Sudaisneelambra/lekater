@@ -11,6 +11,7 @@ export const goadminhomeGuard: CanActivateFn = (route, state) => {
   } else if (token && !token.type){
     inject(Router).navigate(['user/home'])
     return true
+    
   } else {
     inject(Router).navigate(['login'])
     return true

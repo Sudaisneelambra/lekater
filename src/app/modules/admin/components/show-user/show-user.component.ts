@@ -17,7 +17,9 @@ export class ShowUserComponent implements OnInit {
     this.showUsers();
   }
   showUsers() {
-    this.commonService.loadingbooleanValue.next(true);
+    setTimeout(() => {
+      this.commonService.loadingbooleanValue.next(true); 
+    },0);
     this.adminService.showAllUser().subscribe({
       next: (res) => {
         this.commonService.loadingbooleanValue.next(false);
@@ -30,7 +32,9 @@ export class ShowUserComponent implements OnInit {
     });
   }
   changeBlockStatus(userId: any) {
-    this.commonService.loadingbooleanValue.next(true);
+    setTimeout(() => {
+      this.commonService.loadingbooleanValue.next(true); 
+    },0);
     this.adminService.blockAndUnblockUser(userId).subscribe({
       next: (res) => {
         this.commonService.loadingbooleanValue.next(false);

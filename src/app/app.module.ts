@@ -9,6 +9,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { CommonInterceptor } from './common.interceptor';
 import { LoadingComponent } from './components/loading/loading.component';
+import { ConfirmComponent } from './components/confirm/confirm.component';
+import { ErrorComponent } from './components/error/error.component';
+import { SuccessComponent } from './components/success/success.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +25,10 @@ import { LoadingComponent } from './components/loading/loading.component';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    LoadingComponent
+    ConfirmComponent,
+    LoadingComponent,
+    ErrorComponent,
+    SuccessComponent,
   ],
   providers: [
     {
