@@ -86,7 +86,7 @@ export class AllOrdersComponent implements OnInit{
 
   // pagenation next button show boolean
   nextbuttonshowfunction(){
-    if(Math.floor(this.lengthOfOrder/10)>=this.page){
+    if(Math.floor(this.lengthOfOrder/10)>=this.page && length%10 !== 0){
       return true
     } else {
       return false

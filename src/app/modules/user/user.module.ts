@@ -40,10 +40,6 @@ import { SingleOrderDetailsComponent } from './components/single-order-details/s
     RouterModule,
     FormsModule,
     ReactiveFormsModule,
-    ConfirmComponent,
-    LoadingComponent,
-    ErrorComponent,
-    SuccessComponent,
     HttpClientModule
   ]
 })

@@ -12,17 +12,21 @@ export class LoginComponent implements OnInit {
 
   message!:string
   errormessage!:string
+  loginForm!: FormGroup;
+  loginButton: Boolean = false;
+
   constructor(
     private formBuilder: FormBuilder,
     private commonService: CommonService,
     private router:Router
   ) {}
-  loginForm!: FormGroup;
-  loginButton: Boolean = false;
+  
 
   ngOnInit(): void {
     this.initializeForm();
   }
+
+  // login form
   initializeForm() {
     this.loginForm = this.formBuilder.group({
       email: ['', Validators.required],
@@ -30,6 +34,7 @@ export class LoginComponent implements OnInit {
     });
   }
 
+  // login
   login() {
     this.errormessage=''
     this.message=''

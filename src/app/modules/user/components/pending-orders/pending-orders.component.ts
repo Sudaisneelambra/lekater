@@ -74,7 +74,7 @@ export class PendingOrdersComponent {
   }
 
   nextbuttonshowfunction(){
-    if(Math.floor(this.length/10)>=this.page){
+    if(Math.floor(this.length/10)>=this.page && this.length%10 !==0){
       return true
     } else {
       return false

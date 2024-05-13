@@ -183,6 +183,7 @@ nav .wrapper {
     padding: 0 20px;
     display: block;
     font-size: 20px;
+    background-color: white;
   }
   .nav-links .drop-menu {
     position: static;

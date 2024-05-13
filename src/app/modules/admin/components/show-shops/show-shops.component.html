@@ -1,18 +1,3 @@
-<!-- <div *ngFor="let shop of shopList" class="border rounded-lg p-4 mb-4 flex flex-col sm:flex-row sm:items-center">
-    <p class="text-xl font-bold flex-grow">{{ shop.shopName }}</p>
-    <div class="flex flex-col sm:flex-row sm:items-center sm:ml-4">
-        <p class="text-gray-600 mb-2 sm:mr-4">District: {{ shop.district }}</p>
-        <p class="text-gray-600 mb-2 sm:mr-4">Location: {{ shop.location }}</p>
-    </div>
-    <button class="text-white font-bold py-2 px-4 rounded ml-auto sm:ml-0"
-        [ngClass]="{'bg-red-500': !shop.deleteStatus, 'bg-green-500': shop.deleteStatus}"
-        (click)="deleteShop(shop._id)">
-        <span *ngIf="!shop.deleteStatus">Delete</span>
-        <span *ngIf="shop.deleteStatus">Undo</span>
-</button>
-
-</div> -->
-
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
     <div *ngFor="let shop of shopList" class="relative bg-white rounded-md border-2 shadow-md p-4">
         <p class="text-xl font-bold text-gray-800">{{ shop.shopName }}</p>

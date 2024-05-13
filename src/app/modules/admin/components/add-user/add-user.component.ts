@@ -29,20 +29,40 @@ export class AddUserComponent {
     });
   }
 
+
+
+
   onSubmit() {
     if (this.addUserForm.valid) {
-      this.commonService.loadingbooleanValue.next(true);
+     this.commonService.confirmationBooleanValue.next(true)
+     this.commonService.confirmMessage.next('Do you confirm to add this user')
+     const data =this.addUserForm.value
+     const promis = new Promise((resolve,reject)=>{
+      data.resolve= resolve
+     })
+
+     promis.then(()=>{
+      this.commonService.loadingbooleanValue.next(true)
       this.adminService.addUser(this.addUserForm.value).subscribe({
         next: (res) => {
-          alert(res.message);
+          this.commonService.successbooleanValue.next(true)
+          this.commonService.successMessage.next(res.message)
+          this.commonService.confirmationBooleanValue.next(false)
+          this.commonService.confirmMessage.next('')
           this.addUserForm.reset();
           this.commonService.loadingbooleanValue.next(false);
         },
         error: (err) => {
           console.log(err);
+          this.commonService.ErrorbooleanValue.next(true)
+          this.commonService.errorMessage.next(err.error.message)
+          this.commonService.confirmationBooleanValue.next(false)
+          this.commonService.confirmMessage.next('')
           this.commonService.loadingbooleanValue.next(false);
         },
       });
+     })
+     this.commonService.orderingdata.next(data);
     } else {
       alert('Please check the form for errors');
     }

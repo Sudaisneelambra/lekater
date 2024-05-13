@@ -74,7 +74,7 @@ export class DeliveredOrdersComponent {
   }
 
   nextbuttonshowfunction(){
-    if(Math.floor(this.length/10)>=this.page){
+    if(Math.floor(this.length/10)>=this.page && length%10 !== 0){
       return true
     } else {
       return false
