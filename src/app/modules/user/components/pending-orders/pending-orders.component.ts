@@ -56,7 +56,6 @@ export class PendingOrdersComponent {
         this.allPendingOrdersList=this.data.slice(this.startindex,this.endindex)
         console.log(this.allPendingOrdersList);
         this.length=res?.length
-        window.scrollTo({ top: 0, behavior: 'smooth' });
       },
       error:(err)=>{
         console.log(err);
@@ -78,6 +77,7 @@ export class PendingOrdersComponent {
     this.startindex=(this.page-1)*10
     this.endindex=this.startindex+10
     this.allPendingOrdersList=this.data.slice(this.startindex,this.endindex)
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
   next(){
@@ -85,6 +85,7 @@ export class PendingOrdersComponent {
     this.startindex=(this.page-1)*10
     this.endindex=this.startindex+10
     this.allPendingOrdersList=this.data.slice(this.startindex,this.endindex)
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
   nextbuttonshowfunction(){
