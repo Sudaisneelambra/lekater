@@ -71,6 +71,10 @@
         <span class="property-label">Order delivered Date : </span>
         <span class="property-value">{{singleorderData?.DeliveredDate ? (singleorderData.DeliveredDate | date) : 'Not Delivered '  }}</span>
       </div>
+      <div class="order-property  py-1">
+        <span class="property-label">Cancel Status : </span>
+        <span class="property-value">{{singleorderData?.cancelStatus}}</span>
+      </div>
  
 
       <div class="order-property1  flex !justify-around py-2" *ngIf="!singleorderData?.orderDeliveriedStatus && !singleorderData?.cancelStatus">

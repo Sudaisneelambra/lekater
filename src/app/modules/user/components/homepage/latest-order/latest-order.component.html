@@ -1,16 +1,16 @@
 <div class=" grid place-items-center  bg-gray-900">
     <h1 class=" w-[90%] text-[white] text-[30px] font-bold py-3">Latest Orders</h1>
-    <div class="flex-col-reverse flex w-[90%]">
+    <div class="flex-col flex w-[90%]">
                 <div 
                 class="flex items-center  justify-between bg-gray-800 p-4 mb-4 rounded-md  hover:border hover:border-yellow-700 transition duration-100"
-                *ngFor="let order of latestOrders"
-                >
+                *ngFor="let order of latestOrders; let i = index"
+                [ngClass]="i%2 !==0? 'bg-gray-800' : 'bg-gray-600'">
                   <div class="flex flex-col items-center  w-full">
                     <div class=" w-full ">
                       <h2 class="text-white font-semibold mb-2">Shop Name: {{order?.shopdetails[0]?.shopName}} , {{order?.shopdetails[0]?.location}} , {{order?.shopdetails[0]?.district}}</h2>
                       <p class="text-gray-400">Item Name: {{order?.itemName}}</p>
                       <p class="text-gray-400">Ordered Date: {{order?.orderReceivedDate | date}}</p>
-                      <p class="text-gray-400">Deliver Date: {{order?.expectingDeliveryDate | date}}</p>
+                      <p class="text-gray-400">Delivery Date: {{order?.expectingDeliveryDate | date}}</p>
                     </div>
                     <div class="mt-4">
                       <button class="px-8 py-2 bg-red-600 text-white rounded-md hover:bg-red-800 focus:outline-none" (click)="goToTheSingleOrder(order?._id)">View More</button>
