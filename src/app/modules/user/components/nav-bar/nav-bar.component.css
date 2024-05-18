@@ -51,6 +51,16 @@ nav .wrapper {
   color: red;
   transition: .2s ease;
 }
+
+.nav-links li a:active {
+  color: red;
+}
+
+.nav-links li a.active {
+  color: red; 
+  font-weight: bold;
+}
+
 .nav-links .mobile-item {
   display: none;
 }
@@ -179,12 +189,14 @@ nav .wrapper {
   .nav-links li {
     margin: 15px 10px;
   }
+
   .nav-links li a {
     padding: 0 20px;
     display: block;
     font-size: 20px;
     background-color: white;
   }
+  
   .nav-links .drop-menu {
     position: static;
     opacity: 1;
