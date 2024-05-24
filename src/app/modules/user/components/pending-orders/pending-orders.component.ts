@@ -12,9 +12,6 @@ export class PendingOrdersComponent {
   allPendingOrdersList:any
   length!:any
   page=1
-  startindex!:number
-  endindex!:number
-  data!:any
 
   private searchTerms = new Subject<string>();
 
@@ -41,21 +38,16 @@ export class PendingOrdersComponent {
   }
 
   ngOnInit(): void {
-    this.startindex=0
-    this.endindex=0
     this.allPendingOrders()
   }
 
   allPendingOrders(){
     this.userService.allPendingOrders(this.page).subscribe({
       next:(res)=>{
-        this.data=res?.data
-        console.log(this.data);
-        this.startindex=(this.page-1)*10
-        this.endindex=this.startindex+10
-        this.allPendingOrdersList=this.data.slice(this.startindex,this.endindex)
+        this.allPendingOrdersList=res?.data
         console.log(this.allPendingOrdersList);
         this.length=res?.length
+        window.scrollTo({ top: 0, behavior: 'smooth' });
       },
       error:(err)=>{
         console.log(err);
@@ -74,18 +66,12 @@ export class PendingOrdersComponent {
 
   prev(){
     this.page -=1
-    this.startindex=(this.page-1)*10
-    this.endindex=this.startindex+10
-    this.allPendingOrdersList=this.data.slice(this.startindex,this.endindex)
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    this.allPendingOrders()
   }
 
   next(){
     this.page +=1
-    this.startindex=(this.page-1)*10
-    this.endindex=this.startindex+10
-    this.allPendingOrdersList=this.data.slice(this.startindex,this.endindex)
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    this.allPendingOrders()
   }
 
   nextbuttonshowfunction(){
