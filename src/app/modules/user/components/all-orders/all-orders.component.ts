@@ -51,6 +51,7 @@ export class AllOrdersComponent implements OnInit{
     this.userService.getAllOrders(this.page).subscribe({
       next:(res)=>{
         this.filteredlist=res?.data
+        console.log(this.filteredlist);
         this.lengthOfOrder=res.searchedlength
         console.log(this.lengthOfOrder);
         
