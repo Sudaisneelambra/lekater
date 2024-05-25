@@ -3,6 +3,7 @@ import { UserService } from '../../services/user.service';
 import { Router } from '@angular/router';
 import { debounceTime, distinctUntilChanged, skipWhile, switchMap } from 'rxjs/operators';
 import { Subject, forkJoin, of } from 'rxjs';
+import { PageEvent } from '@angular/material/paginator';
 
 
 @Component({
@@ -51,7 +52,6 @@ export class AllOrdersComponent implements OnInit{
     this.userService.getAllOrders(this.page).subscribe({
       next:(res)=>{
         this.filteredlist=res?.data
-        console.log(this.filteredlist);
         this.lengthOfOrder=res.searchedlength
         console.log(this.lengthOfOrder);
         
@@ -94,6 +94,12 @@ export class AllOrdersComponent implements OnInit{
     } else {
       return false
     }
+  }
+
+  onPageChange(event:PageEvent){
+    this.page=event.pageIndex+1
+    console.log(this.page);
+    this.getAllOrders();
   }
 }
 

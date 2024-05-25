@@ -20,6 +20,8 @@ import { AllOrdersComponent } from './components/all-orders/all-orders.component
 import { SingleOrderDetailsComponent } from './components/single-order-details/single-order-details.component';
 
 
+import { MatPaginatorModule } from "@angular/material/paginator";
+
 
 @NgModule({
   declarations: [
@@ -40,7 +42,8 @@ import { SingleOrderDetailsComponent } from './components/single-order-details/s
     RouterModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    MatPaginatorModule
   ]
 })
 export class UserModule { }
