@@ -12,6 +12,8 @@ import { LoadingComponent } from './components/loading/loading.component';
 import { ConfirmComponent } from './components/confirm/confirm.component';
 import { ErrorComponent } from './components/error/error.component';
 import { SuccessComponent } from './components/success/success.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 @NgModule({
   declarations: [
@@ -29,6 +31,7 @@ import { SuccessComponent } from './components/success/success.component';
     LoadingComponent,
     ErrorComponent,
     SuccessComponent,
+    BrowserAnimationsModule,
   ],
   providers: [
     {

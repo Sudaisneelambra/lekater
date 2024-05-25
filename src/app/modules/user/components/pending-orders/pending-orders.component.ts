@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { Router } from '@angular/router';
 import { Subject, debounceTime, distinctUntilChanged, switchMap } from 'rxjs';
+import { PageEvent } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-pending-orders',
@@ -45,7 +46,6 @@ export class PendingOrdersComponent {
     this.userService.allPendingOrders(this.page).subscribe({
       next:(res)=>{
         this.allPendingOrdersList=res?.data
-        console.log(this.allPendingOrdersList);
         this.length=res?.length
         window.scrollTo({ top: 0, behavior: 'smooth' });
       },
@@ -80,5 +80,11 @@ export class PendingOrdersComponent {
     } else {
       return false
     }
+  }
+
+  onPageChange(event:PageEvent){
+    this.page=event.pageIndex+1
+    console.log(this.page);
+    this.allPendingOrders();
   }
 }
