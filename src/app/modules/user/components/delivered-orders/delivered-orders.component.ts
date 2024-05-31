@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { Router } from '@angular/router';
 import { Subject, debounceTime, distinctUntilChanged, switchMap } from 'rxjs';
+import { PageEvent } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-delivered-orders',
@@ -27,7 +28,7 @@ export class DeliveredOrdersComponent {
 
       })).subscribe({
         next:(res)=>{
-          this.length=res.length
+          this.length=res.searchedlength
           this.allDeliveredOrdersList=res.data
           
         },
@@ -63,21 +64,10 @@ export class DeliveredOrdersComponent {
     this.searchTerms.next(value)
   }
 
-  prev(){
-    this.page -=1
-    this.allDeliveredOrders()
-  }
 
-  next(){
-    this.page +=1
-    this.allDeliveredOrders()
-  }
-
-  nextbuttonshowfunction(){
-    if(Math.floor(this.length/10)>=this.page && length%10 !== 0){
-      return true
-    } else {
-      return false
-    }
+  onPageChange(event:PageEvent){
+    this.page=event.pageIndex+1
+    console.log(this.page);
+    this.allDeliveredOrders();
   }
 }

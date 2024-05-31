@@ -29,8 +29,11 @@ export class PendingOrdersComponent {
 
       })).subscribe({
         next:(res)=>{
-          this.length=res.length
+          this.length=res.searchedlength
           this.allPendingOrdersList=res.data
+          console.log(this.length);
+
+          
         },
         error:(err)=>{
           console.log(err);
@@ -46,7 +49,7 @@ export class PendingOrdersComponent {
     this.userService.allPendingOrders(this.page).subscribe({
       next:(res)=>{
         this.allPendingOrdersList=res?.data
-        this.length=res?.length
+        this.length=res?.length   
         window.scrollTo({ top: 0, behavior: 'smooth' });
       },
       error:(err)=>{
@@ -64,27 +67,29 @@ export class PendingOrdersComponent {
       this.searchTerms.next(value)
   }
 
-  prev(){
-    this.page -=1
-    this.allPendingOrders()
-  }
-
-  next(){
-    this.page +=1
-    this.allPendingOrders()
-  }
-
-  nextbuttonshowfunction(){
-    if(Math.floor(this.length/10)>=this.page && this.length%10 !==0){
-      return true
-    } else {
-      return false
-    }
-  }
 
   onPageChange(event:PageEvent){
     this.page=event.pageIndex+1
     console.log(this.page);
     this.allPendingOrders();
+  }
+
+  searchbyDate(val:any){
+    if(val?.trim() !== '') {
+      this.userService.searchbyDate(val).subscribe({
+        next:(res)=>{
+          if(res.success){
+            this.allPendingOrdersList =res.data
+            this.length = this.allPendingOrdersList?.length
+          } else{
+            console.log(res?.message);
+            
+          }
+        },
+        error:(err)=>{
+          console.log(err);
+        }
+      })
+    }    
   }
 }

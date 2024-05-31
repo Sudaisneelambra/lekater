@@ -71,4 +71,8 @@ export class UserService {
     return this.http.get(`${this.api}/user/getsearchdeliveredorder?searchValue=${value}&page=${page}`)
   }
 
+  searchbyDate(value:any):Observable<any>{
+    return this.http.get(`${this.api}/user/getsearchbydate?searchValue=${value}`)
+  }
+
 }

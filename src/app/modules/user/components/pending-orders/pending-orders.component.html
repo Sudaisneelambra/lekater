@@ -9,13 +9,19 @@
         class="w-full !h-10 md:w-[100%]  bg-gray-300 outline-none px-2  mr-0 "
         placeholder="Enter shop Name" />
         <img class="h-8 pr-2" src="/assets/images/search-interface-symbol (1).png" alt="" (click)="search(input.value)" >
-      </div>
+    </div>
+    <div class=" w-[90%] flex bg-gray-300 px-3 text-gray-900 border border-gray-700 items-center overflow-hidden mb-2 rounded-md focus:outline-none outline-none ">
+      <input  type="date" name="date"
+      #searchdate
+      class="w-full !h-10 md:w-[100%]  bg-gray-300 outline-none px-2  mr-0 "/>
+      <button class="px-3 py-2 bg-[#25642d] rounded-md font-bold text-[white]" (click)="searchbyDate(searchdate.value)">Apply</button>
+    </div>
     <div class="flex-col flex w-[90%]">
         <ng-container *ngIf="allPendingOrdersList && allPendingOrdersList?.[0]; else nodata">
                 <div 
                 class="flex items-center  justify-between bg-gray-800 p-4 mb-4 rounded-md  hover:border hover:border-yellow-700 transition duration-100"
                 *ngFor="let order of allPendingOrdersList; let i = index;"
-                [ngClass]="i%2 !==0? 'bg-gray-800' : 'bg-gray-600'">
+                [ngStyle]="{ 'background-color': i % 2 !== 0 ? '#2d3748' : '#4a5568' }">
                   <div class="flex flex-col items-center  w-full">
                     <div class=" w-full ">
                       <h2 class="text-white font-semibold mb-2"><span class="font-bold text-[red]">SHOP NAME : </span>{{order?.shopdetails[0]?.shopName}} , {{order?.shopdetails[0]?.location}} , {{order?.shopdetails[0]?.district}}</h2>
@@ -37,14 +43,6 @@
               </div>
             </ng-template>
           </div>
-          <!-- <div class="flex gap-3">
-            <div class="my-2" *ngIf="length > 10 && page !==1">
-              <h1><button class="px-3 py-1 border bg-[#ff000085] rounded-lg text-[white]" (click)="prev()">Prev</button></h1>
-            </div>
-            <div class="my-2" *ngIf="nextbuttonshowfunction()">
-              <h1><button class="px-3 py-1 border bg-[#ff000085] rounded-lg text-[white]" (click)="next()">Next</button></h1>
-            </div>
-          </div> -->
           <mat-paginator [length]="length" [pageSize]="10" (page)="onPageChange($event)" ></mat-paginator>
           <div class="mb-4 mt-2 pagination-info" *ngIf="allPendingOrdersList && allPendingOrdersList?.[0]">
             Page : {{ page }}
