@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { Router } from '@angular/router';
-import { debounceTime, distinctUntilChanged, skipWhile, switchMap } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, skipWhile, switchMap, tap } from 'rxjs/operators';
 import { Subject, forkJoin, of } from 'rxjs';
-import { PageEvent } from '@angular/material/paginator';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { CommonService } from 'src/app/services/common.service';
 
 
 @Component({
@@ -19,14 +20,16 @@ export class AllOrdersComponent implements OnInit{
   searchedlength!:number
   searchedlist:OrderDetail[]=[]
   private searchTerms = new Subject<string>();
+  state!:string
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  searchValue!: string;
 
-
-  constructor(private userService:UserService, private router:Router) {
+  constructor(private userService:UserService, private router:Router,private commonservice:CommonService) {
     this.searchTerms.pipe(
-      debounceTime(2000), 
-      distinctUntilChanged(),
+      debounceTime(2000),
       switchMap((term: string) => {
         if (term.trim() === '') {
+          this.state = 'initial'
           return userService.getAllOrders(this.page)
         } else {
           return this.userService.searchallorder(term, this.page); 
@@ -34,6 +37,7 @@ export class AllOrdersComponent implements OnInit{
 
       })).subscribe({
         next:(res)=>{
+          commonservice.loadingbooleanValue.next(false)
           this.lengthOfOrder=res.searchedlength
           this.filteredlist=res.data
         },
@@ -44,6 +48,7 @@ export class AllOrdersComponent implements OnInit{
   }
 
   ngOnInit(): void {
+    this.state='initial'
     this.getAllOrders()
   }
 
@@ -51,10 +56,10 @@ export class AllOrdersComponent implements OnInit{
   getAllOrders(){
     this.userService.getAllOrders(this.page).subscribe({
       next:(res)=>{
+        this.commonservice.loadingbooleanValue.next(false)
         this.filteredlist=res?.data
         this.lengthOfOrder=res.searchedlength
         console.log(this.lengthOfOrder);
-        
         window.scrollTo({ top: 0, behavior: 'smooth' });
       },
       error:(err)=>{
@@ -71,21 +76,16 @@ export class AllOrdersComponent implements OnInit{
 
   // searching order
   search(value:any){
+      setTimeout(() => {
+        this.state='search'
+      }, 0);
       this.lengthOfOrder=0
+      this.searchValue = value
+      this.page = 1
+      this.paginator.firstPage();
       this.searchTerms.next(value)
   }
 
-  // pagination next
-  next(){
-    this.page+=1
-    this.getAllOrders()
-  }
-
-  // pagenation prev
-  prev(){
-    this.page-=1
-    this.getAllOrders()
-  }
 
   // pagenation next button show boolean
   nextbuttonshowfunction(){
@@ -96,10 +96,14 @@ export class AllOrdersComponent implements OnInit{
     }
   }
 
-  onPageChange(event:PageEvent){
+  pagination(event:PageEvent){
     this.page=event.pageIndex+1
-    console.log(this.page);
-    this.getAllOrders();
+    if(this.state == 'initial') {    
+      this.getAllOrders()
+    } else if(this.state == 'search') {
+      this.commonservice.loadingbooleanValue.next(true)
+      this.searchTerms.next(this.searchValue);
+    }
   }
 }
 
