@@ -33,7 +33,6 @@ export class LatestOrderComponent implements OnInit, DoCheck{
         next:(res)=>{
         this.commonService.loadingbooleanValue.next(false)
           this.latestOrders = res?.data
-          console.log(this.latestOrders);
           
         },
         error:(err)=>{
