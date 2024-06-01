@@ -1,6 +1,7 @@
 import { Component, DoCheck, Input, OnInit } from '@angular/core';
 import { UserService } from '../../../services/user.service';
 import { Router } from '@angular/router';
+import { CommonService } from 'src/app/services/common.service';
 
 @Component({
   selector: 'app-latest-order',
@@ -12,11 +13,10 @@ export class LatestOrderComponent implements OnInit, DoCheck{
   latestOrders:any
   @Input() order:any
 
-  constructor(private userservice:UserService, private router:Router) {}
+  constructor(private userservice:UserService, private router:Router,private commonService:CommonService) {}
  
 
   ngOnInit(): void {
-
     this.getorders()
   }
 
@@ -28,13 +28,15 @@ export class LatestOrderComponent implements OnInit, DoCheck{
   }
 
   getorders(){
+      this.commonService.loadingbooleanValue.next(true)
       this.userservice.getorders().subscribe({
         next:(res)=>{
+        this.commonService.loadingbooleanValue.next(false)
           this.latestOrders = res?.data
-          console.log(this.latestOrders);
           
         },
         error:(err)=>{
+        this.commonService.loadingbooleanValue.next(false)
           console.log(err);
           
         }

@@ -10,7 +10,7 @@
         placeholder="Enter shop Name" />
         <img class="h-8 pr-2" src="/assets/images/search-interface-symbol (1).png" alt="" (click)="search(input.value)" >
       </div>
-    <div class="flex-col-reverse flex w-[90%]">
+    <div class="flex-col flex w-[90%]">
         <ng-container *ngIf="allDeliveredOrdersList  && allDeliveredOrdersList ?.[0]; else nodata">
                 <div 
                 class="flex items-center  justify-between bg-gray-800 p-4 mb-4 rounded-md  hover:border hover:border-yellow-700 transition duration-100"
@@ -38,14 +38,7 @@
               </div>
             </ng-template>
           </div>
-          <div class="flex gap-3">
-            <div class="my-2" *ngIf="length > 10 && page !==1">
-              <h1><button class="px-3 py-1 border bg-[#ff000085] rounded-lg text-[white]" (click)="prev()">Prev</button></h1>
-            </div>
-            <div class="my-2" *ngIf="nextbuttonshowfunction()">
-              <h1><button class="px-3 py-1 border bg-[#ff000085] rounded-lg text-[white]" (click)="next()">Next</button></h1>
-            </div>
-          </div>
+          <mat-paginator [length]="length" [pageSize]="10" (page)="onPageChange($event)" ></mat-paginator>
           <div class="mb-4 mt-2 pagination-info" *ngIf="allDeliveredOrdersList && allDeliveredOrdersList?.[0]">
             Page : {{ page }}
           </div>
