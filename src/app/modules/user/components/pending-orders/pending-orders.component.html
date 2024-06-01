@@ -14,7 +14,7 @@
       <input  type="date" name="date"
       #searchdate
       class="w-full !h-10 md:w-[100%]  bg-gray-300 outline-none px-2  mr-0 "/>
-      <button class="px-3 py-2 bg-[#25642d] rounded-md font-bold text-[white]" (click)="searchbyDate(searchdate.value)">Apply</button>
+      <button class="px-3 py-1 bg-[#25642d] rounded-md font-bold text-[white]" (click)="searchbyDate(searchdate.value)">Apply</button>
     </div>
     <div class="flex-col flex w-[90%]">
         <ng-container *ngIf="allPendingOrdersList && allPendingOrdersList?.[0]; else nodata">

@@ -10,7 +10,7 @@
         placeholder="Enter shop Name" />
         <img class="h-8 pr-2" src="/assets/images/search-interface-symbol (1).png" alt="" (click)="search(input.value)" >
       </div>
-    <div class="flex-col-reverse flex w-[90%]">
+    <div class="flex-col flex w-[90%]">
         <ng-container *ngIf="allDeliveredOrdersList  && allDeliveredOrdersList ?.[0]; else nodata">
                 <div 
                 class="flex items-center  justify-between bg-gray-800 p-4 mb-4 rounded-md  hover:border hover:border-yellow-700 transition duration-100"

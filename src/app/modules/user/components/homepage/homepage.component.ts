@@ -18,7 +18,6 @@ export class UserHomepageComponent implements OnInit{
     this.activatedrout.queryParams.subscribe(params=>{ 
       if(params['id']){
         this.id=params['id']
-        
       }
     })
   }

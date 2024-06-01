@@ -32,6 +32,7 @@ export class AllOrdersComponent implements OnInit{
           this.state = 'initial'
           return userService.getAllOrders(this.page)
         } else {
+          this.commonservice.loadingbooleanValue.next(true)
           return this.userService.searchallorder(term, this.page); 
         }
 
@@ -40,8 +41,12 @@ export class AllOrdersComponent implements OnInit{
           commonservice.loadingbooleanValue.next(false)
           this.lengthOfOrder=res.searchedlength
           this.filteredlist=res.data
+          window.scrollTo({ top: 0, behavior: 'smooth' });
         },
         error:(err)=>{
+          commonservice.loadingbooleanValue.next(false)
+          commonservice.ErrorbooleanValue.next(true)
+          commonservice.errorMessage.next(err.error.message)
           console.log(err);
         }
       })
@@ -54,15 +59,18 @@ export class AllOrdersComponent implements OnInit{
 
   // get all orders
   getAllOrders(){
+    this.commonservice.loadingbooleanValue.next(true)
     this.userService.getAllOrders(this.page).subscribe({
       next:(res)=>{
         this.commonservice.loadingbooleanValue.next(false)
-        this.filteredlist=res?.data
+        this.filteredlist=res?.data        
         this.lengthOfOrder=res.searchedlength
-        console.log(this.lengthOfOrder);
         window.scrollTo({ top: 0, behavior: 'smooth' });
       },
       error:(err)=>{
+        this.commonservice.loadingbooleanValue.next(false)
+        this.commonservice.ErrorbooleanValue.next(true)
+        this.commonservice.errorMessage.next(err.error.message)
         console.log(err);
       }
     })
@@ -86,22 +94,11 @@ export class AllOrdersComponent implements OnInit{
       this.searchTerms.next(value)
   }
 
-
-  // pagenation next button show boolean
-  nextbuttonshowfunction(){
-    if(Math.floor(this.lengthOfOrder/10)>=this.page && this.lengthOfOrder%10 !== 0){
-      return true
-    } else {
-      return false
-    }
-  }
-
   pagination(event:PageEvent){
     this.page=event.pageIndex+1
     if(this.state == 'initial') {    
       this.getAllOrders()
     } else if(this.state == 'search') {
-      this.commonservice.loadingbooleanValue.next(true)
       this.searchTerms.next(this.searchValue);
     }
   }

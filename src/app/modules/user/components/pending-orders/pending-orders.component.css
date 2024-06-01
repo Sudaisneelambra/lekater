@@ -1,17 +1,30 @@
 .pagination-info {
-    font-size: 15px;
-    color: #ffffff;
-    padding: 6px 10px;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(255, 255, 255, 0.1);
-  }
+  font-size: 15px;
+  color: #ffffff;
+  padding: 6px 10px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(255, 255, 255, 0.1);
+}
 
-  mat-paginator{
-    background-color: rgba(255, 255, 255, 0.27);
-    color: white;
-  }
-
-
-
-
+mat-paginator{
+  background-color: rgba(255, 255, 255, 0.27);
+  color: white;
   
+}
+
+@media(max-width:420px){
+  ::ng-deep .mat-mdc-paginator-container{
+    font-size: 10px !important;
+    justify-content: center !important;
+    align-items: center !important;
+    flex-wrap: wrap !important;
+  }
+  ::ng-deep .mat-mdc-paginator-range-label{
+    margin: 0 14px 0 14px !important;
+  }
+}
+
+
+
+
+
