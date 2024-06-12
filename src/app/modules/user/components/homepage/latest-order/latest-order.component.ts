@@ -28,7 +28,9 @@ export class LatestOrderComponent implements OnInit, DoCheck{
   }
 
   getorders(){
-      this.commonService.loadingbooleanValue.next(true)
+      setTimeout(()=>{
+        this.commonService.loadingbooleanValue.next(true)
+      })
       this.userservice.getorders().subscribe({
         next:(res)=>{
         this.commonService.loadingbooleanValue.next(false)

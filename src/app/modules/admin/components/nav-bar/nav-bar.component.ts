@@ -9,8 +9,12 @@ import { Router } from '@angular/router';
 export class NavBarComponent {
   constructor(private router:Router){}
   logout(){
-    localStorage.clear()
-    this.router.navigate([''])
+    const confirm = window.confirm('Are you sure to Log Out')
+    if(confirm){
+      localStorage.clear()
+      this.router.navigate([''])
+    }
+    
   }
   closeMenu(){
     const menuCheckbox = document.getElementById('menu-btn') as HTMLInputElement;

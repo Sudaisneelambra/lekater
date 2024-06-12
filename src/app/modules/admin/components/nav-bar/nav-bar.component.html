@@ -1,6 +1,6 @@
 <nav>
     <div class="wrapper">
-        <div class="logo"><a href="#">Logo</a></div>
+        <div class="logo"><a [routerLink]="'/admin/home'" (click)="closeMenu()">Logo</a></div>
         <input type="radio" name="slider" id="menu-btn">
         <input type="radio" name="slider" id="close-btn">
         <ul class="nav-links">
@@ -10,6 +10,7 @@
             <li><a [routerLink]="'/admin/showShops'" class="desktop-item" (click)="closeMenu()">Show Shops</a></li>
             <li><a [routerLink]="'/admin/addUser'" class="desktop-item" (click)="closeMenu()">Add User</a></li>
             <li><a [routerLink]="'/admin/addShops'" (click)="closeMenu()">Add Shops</a></li>
+            <li><a [routerLink]="'/user'" (click)="closeMenu()">Go To UserSide</a></li>
             <li><a (click)="logout()">Logout</a></li>
         </ul>
         <label for="menu-btn" class="btn menu-btn "><i class="fas fa-bars bg-black"></i></label>

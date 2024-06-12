@@ -5,12 +5,13 @@
         <input type="radio" name="slider" id="close-btn">
         <ul class="nav-links">
             <label for="close-btn" class="btn close-btn"><i class="fas fa-times"></i></label>
-            <li routerLinkActive="active" ><a [routerLink]="'/user/home'"  (click)="closeMenu()">Home</a></li>
+            <li routerLinkActive="active"  *ngIf="!token?.type"><a [routerLink]="'/user/home'"  (click)="closeMenu()">Home</a></li>
             <li routerLinkActive="active" ><a [routerLink]="'/user/allOrders'"  (click)="closeMenu()" >All Orders</a></li>
             <li routerLinkActive="active" ><a [routerLink]="'/user/pendingOrders'"   class="desktop-item" (click)="closeMenu()">Pending Orders</a></li>
             <li routerLinkActive="active" ><a [routerLink]="'/user/deliveredOrders'"   class="desktop-item" (click)="closeMenu()">Delivered Orders</a></li>
             <li routerLinkActive="active" ><a [routerLink]="'/user/cancelledOrders'"   (click)="closeMenu()">cancelled Orders</a></li>
-            <li routerLinkActive="active" ><a [routerLink]="'/user/cancelledOrders'"   (click)="logout()">Logout</a></li>
+            <li routerLinkActive="active" *ngIf="token?.type"><a [routerLink]="'/admin'"   (click)="closeMenu()">To AdminSide</a></li>
+            <li ><a [routerLink]="'/user/cancelledOrders'"   (click)="logout()">Logout</a></li>
         </ul>
         <label for="menu-btn" class="btn menu-btn"><i class="fas fa-bars text-[black]"></i></label>
     </div>

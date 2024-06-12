@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonService } from 'src/app/services/common.service';
 
 @Component({
@@ -6,9 +6,16 @@ import { CommonService } from 'src/app/services/common.service';
   templateUrl: './nav-bar.component.html',
   styleUrls: ['./nav-bar.component.css']
 })
-export class UserNavBarComponent {
+export class UserNavBarComponent implements OnInit{
 
+  token:any
   constructor(private commonservice:CommonService) {}
+
+
+  ngOnInit(): void {
+       this.token = this.commonservice.tockendecode();
+       
+  }
 
   closeMenu(){
     const menuCheckbox = document.getElementById('menu-btn') as HTMLInputElement;
@@ -18,6 +25,11 @@ export class UserNavBarComponent {
   }
 
   logout(){
-    this.commonservice.logout()
+
+    const confirm = window.confirm('Are you sure to Log Out')
+    if(confirm){
+      this.commonservice.logout()
+    }
+    
   }
 }

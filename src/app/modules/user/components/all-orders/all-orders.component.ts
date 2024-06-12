@@ -59,7 +59,9 @@ export class AllOrdersComponent implements OnInit{
 
   // get all orders
   getAllOrders(){
-    this.commonservice.loadingbooleanValue.next(true)
+    setTimeout(() => {
+      this.commonservice.loadingbooleanValue.next(true)
+    },);
     this.userService.getAllOrders(this.page).subscribe({
       next:(res)=>{
         this.commonservice.loadingbooleanValue.next(false)
