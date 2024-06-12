@@ -56,7 +56,9 @@ export class PendingOrdersComponent {
   }
 
   allPendingOrders(){
-    this.commonService.loadingbooleanValue.next(true)
+    setTimeout(() => {
+      this.commonService.loadingbooleanValue.next(true) 
+    });
     this.userService.allPendingOrders(this.page).subscribe({
       next:(res)=>{
         this.commonService.loadingbooleanValue.next(false)

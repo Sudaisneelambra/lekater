@@ -39,8 +39,9 @@ export class CommonService {
   }
 
   logout(){
-    localStorage.clear()
-    this.router.navigate(['/'])
+    
+      localStorage.clear()
+      this.router.navigate(['/'])
   }
   
 
