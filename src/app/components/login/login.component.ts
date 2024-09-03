@@ -29,8 +29,8 @@ export class LoginComponent implements OnInit {
   // login form
   initializeForm() {
     this.loginForm = this.formBuilder.group({
-      email: ['', Validators.required],
-      password: ['', Validators.required],
+      email: ['sudaisanuneelambra21@gmail.com', Validators.required],
+      password: ['SUDA9747', Validators.required],
     });
   }
 
@@ -45,8 +45,9 @@ export class LoginComponent implements OnInit {
         next: (res) => {
           this.commonService.loadingbooleanValue.next(false)
           if(res.success) {
-            this.message=res.message
+            this.message=res.message            
             localStorage.setItem('token',res.token)
+            
             const token =this.commonService.tockendecode()
             if(token.type){
               this.router.navigate(['/admin'])

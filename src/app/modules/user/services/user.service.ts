@@ -23,7 +23,7 @@ export class UserService {
     return this.http.get(`${this.api}/user/getShops`)
   }
 
-  getorders():Observable<any>{
+  getorders():Observable<any>{    
     return this.http.get(`${this.api}/user/getOrder`)
   }
 

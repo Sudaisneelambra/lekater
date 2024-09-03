@@ -1,0 +1,8 @@
+@media(max-width:540px){
+    .data{
+      grid-template-columns:1fr;
+    }
+    .dates{
+        align-items: normal;
+      }
+  }

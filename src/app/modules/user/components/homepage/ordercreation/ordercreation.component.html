@@ -12,15 +12,36 @@
       <!-- Todo Input -->
       <form [formGroup]="orderForm" *ngIf="formboolean">
         <div class="flex lg:flex-row items-center mb-4 gap-2 lg:gap-0 flex-wrap">
-          <label class="text-[#a54d4d]" for="shop">Shop Name</label>
+          <div class="w-full mr-4">
+            <label class="text-[#a54d4d]" for="shop">Shop Name</label>
 
-          <input  type="text" name="itemName"
-            #input
-            (input)="shopname(input.value)"
-            class="w-full !h-10 md:w-full px-2 py-1 mb-2 mr-0 md:mr-4 bg-gray-800 text-white border border-gray-700 rounded-md focus:outline-none focus:border-yellow-500"
-            placeholder="Enter shopName" />
-
-          <select name="shop" formControlName="shopName"
+            <input  type="text" name="itemName"
+            #shopname
+            (input)="shopName(shopname.value)"
+            class="w-full h-14 md:w-full px-4 py-2 mb-2 mr-0 md:mr-4 bg-gray-800 text-white border border-gray-700 rounded-md focus:outline-none focus:border-yellow-500"
+            placeholder="Search the shop" />
+            <ul class="" >
+              <ng-container *ngIf="isSearching && filteredshop.length === 0; else shopList">
+                <li class="p-1 text-gray-400">No shop found</li>
+              </ng-container>
+              <ng-template #shopList>
+                <li class="p-1" *ngFor="let shop of filteredshop" (click)="shopSelection(shop)">
+                  <span>{{ shop?.shopName }} , {{ shop?.location }} , {{ shop?.district }}</span>
+                </li>
+              </ng-template>
+            </ul>
+          </div>
+          <label class="text-[#a54d4d]" >Shop location</label>
+          <input  type="text"
+            #location
+            class="w-full h-14 md:w-full px-4 py-2 mb-2 mr-0 md:mr-4 bg-gray-800 text-white border border-gray-700 rounded-md focus:outline-none focus:border-yellow-500"
+            placeholder="shop location" [disabled]="true" />
+          <label class="text-[#a54d4d]" >Shop district</label>
+          <input  type="text" 
+            #district
+            class="w-full h-14 md:w-full px-4 py-2 mb-2 mr-0 md:mr-4 bg-gray-800 text-white border border-gray-700 rounded-md focus:outline-none focus:border-yellow-500"
+            placeholder="shop district" [disabled]="true" />
+          <!-- <select name="shop" formControlName="shopName"
             class="overflow-hidden w-full h-14 md:w-full px-4 py-2 mb-2 mr-0 md:mr-4 bg-gray-800 text-white border border-gray-700 rounded-md focus:outline-none focus:border-yellow-500">
             <option value="" disabled selected>Select The Shop</option>
             <ng-container *ngIf="filteredshop?.length === 0">
@@ -29,9 +50,9 @@
             <option *ngFor="let shop of filteredshop" [ngValue]="shop?._id">
               {{ shop?.shopName }} , {{ shop?.location }} , {{ shop?.district }}
             </option>
-          </select>
+          </select> -->
 
-          <label class="text-[#a54d4d]" for="itemName">Item Name</label>
+          <label class="text-[#a54d4d] " for="itemName">Item Name</label>
           <input formControlName="itemName" type="text" name="itemName"
             class="w-full h-14 md:w-full px-4 py-2 mb-2 mr-0 md:mr-4 bg-gray-800 text-white border border-gray-700 rounded-md focus:outline-none focus:border-yellow-500"
             placeholder="Enter the Item Name" />

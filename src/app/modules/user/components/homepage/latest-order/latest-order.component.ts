@@ -18,6 +18,7 @@ export class LatestOrderComponent implements OnInit, DoCheck{
 
   ngOnInit(): void {
     this.getorders()
+    
   }
 
   ngDoCheck(): void {

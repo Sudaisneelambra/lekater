@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { Router } from '@angular/router';
 import { Subject, debounceTime, distinctUntilChanged, switchMap } from 'rxjs';
@@ -19,7 +19,9 @@ export class PendingOrdersComponent {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   private searchTerms = new Subject<string>();
   searchValue: any;
-  searchdate :any
+  // searchdate :any
+
+  @ViewChild('searchdate') searchdate!: ElementRef;
 
   constructor(private userService:UserService, private router:Router, private commonService:CommonService) {
     this.searchTerms.pipe(
@@ -53,6 +55,7 @@ export class PendingOrdersComponent {
   ngOnInit(): void {
     this.state ='initial'
     this.allPendingOrders()
+    
   }
 
   allPendingOrders(){
@@ -146,5 +149,10 @@ export class PendingOrdersComponent {
         }
       })
     }    
+  }
+
+  reset(){
+    this.allPendingOrders()
+    this.searchdate.nativeElement.value=''
   }
 }

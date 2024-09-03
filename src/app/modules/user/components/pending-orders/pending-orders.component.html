@@ -10,11 +10,13 @@
         placeholder="Enter shop Name" />
         <img class="h-8 pr-2" src="/assets/images/search-interface-symbol (1).png" alt="" (click)="search(input.value)" >
     </div>
+    <p class="text-[white] w-[90%]">Search delivery date</p>
     <div class=" w-[90%] flex bg-gray-300 px-3 text-gray-900 border border-gray-700 items-center overflow-hidden mb-2 rounded-md focus:outline-none outline-none ">
       <input  type="date" name="date"
       #searchdate
       class="w-full !h-10 md:w-[100%]  bg-gray-300 outline-none px-2  mr-0 "/>
       <button class="px-3 py-1 bg-[#25642d] rounded-md font-bold text-[white]" (click)="searchbyDate(searchdate.value)">Apply</button>
+      <button class="px-3 py-1 bg-[#25642d] rounded-md font-bold text-[white] ml-2" (click)="reset()">Reset</button>
     </div>
     <div class="flex-col flex w-[90%]">
         <ng-container *ngIf="allPendingOrdersList && allPendingOrdersList?.[0]; else nodata">
@@ -23,11 +25,21 @@
                 *ngFor="let order of allPendingOrdersList; let i = index;"
                 [ngStyle]="{ 'background-color': i % 2 !== 0 ? '#2d3748' : '#4a5568' }">
                   <div class="flex flex-col items-center  w-full">
-                    <div class=" w-full ">
+                    <!-- <div class=" w-full ">
                       <h2 class="text-white font-semibold mb-2"><span class="font-bold text-[red]">SHOP NAME : </span>{{order?.shopdetails[0]?.shopName}} , {{order?.shopdetails[0]?.location}} , {{order?.shopdetails[0]?.district}}</h2>
                       <p class="text-gray-400">Item Name: {{order?.itemName}}</p>
                       <p class="text-gray-400">Ordered Date: {{order?.orderReceivedDate | date}}</p>
                       <p class="text-gray-400">Delivery Date: {{order?.expectingDeliveryDate | date}}</p>
+                    </div> -->
+                    <div class="data w-full grid grid-cols-2">
+                      <div class="">
+                        <h2 class="text-[#ccc4c4] font-semibold mb-2"><span class="font-[500] text-[white]">SHOP NAME : </span>{{order?.shopdetails?.[0]?.shopName}} , {{order?.shopdetails?.[0]?.location}} , {{order?.shopdetails?.[0]?.district}}</h2>
+                      <p class="text-[#ccc4c4]"><span class="font-[500] text-[white]"> Item Name: </span>{{order?.itemName}}</p>
+                      </div>
+                      <div class="dates flex flex-col items-end">
+                        <p class="text-[white]"><span class="text-[#ffbf00]">Ordered Date:</span> {{order?.orderReceivedDate | date}}</p>
+                      <p class="text-[white]"><span class="text-[#6cff00]">Delivery Date:</span> {{order?.expectingDeliveryDate | date}}</p>
+                      </div>
                     </div>
                     <div class="mt-4">
                       <button class="px-8 py-2 bg-red-600 text-white rounded-md hover:bg-red-800 focus:outline-none" (click)="goToTheSingleOrder(order?._id)">View More</button>

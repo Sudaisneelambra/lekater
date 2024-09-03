@@ -29,6 +29,7 @@ export class UserNavBarComponent implements OnInit{
     const confirm = window.confirm('Are you sure to Log Out')
     if(confirm){
       this.commonservice.logout()
+      this.commonservice.ErrorbooleanValue.next(false)
     }
     
   }

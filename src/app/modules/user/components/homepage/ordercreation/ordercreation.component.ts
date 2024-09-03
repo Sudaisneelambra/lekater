@@ -1,4 +1,4 @@
-import { Component, DoCheck, EventEmitter, Input, Output } from '@angular/core';
+import { Component, DoCheck, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommonService } from 'src/app/services/common.service';
 import { UserService } from '../../../services/user.service';
@@ -22,6 +22,12 @@ export class OrdercreationComponent {
   orderdetails: any;
   filteredshop:any
   @Output() reloadevent= new EventEmitter<any>()
+
+  @ViewChild('shopname') selectedShopName!:ElementRef
+  @ViewChild('location') selectedShopLocation!:ElementRef
+  @ViewChild('district') selectedShopDistrict!:ElementRef
+
+  isSearching: boolean = false;
 
   @Input() id: any;
 
@@ -61,7 +67,7 @@ export class OrdercreationComponent {
     this.userservice.getShops().subscribe({
       next: (res) => {
         this.shops = res?.data;
-        this.filteredshop=res?.data
+        // this.filteredshop=res?.data
       },
       error: (err) => {
         console.log(err);
@@ -76,6 +82,10 @@ export class OrdercreationComponent {
     this.userservice.orderdetail(this.id).subscribe({
       next: (res) => {
         this.orderdetails = res.data;
+        const shopDetails= res.data.shopdetails[0]
+        this.selectedShopName.nativeElement.value = shopDetails?.shopName
+        this.selectedShopLocation.nativeElement.value= shopDetails?.location
+        this.selectedShopDistrict.nativeElement.value= shopDetails?.district
         this.orderForm.get('shopName')?.setValue(this.orderdetails?.shopName);
         this.orderForm.get('itemName')?.setValue(this.orderdetails?.itemName);
         this.orderForm
@@ -279,8 +289,17 @@ export class OrdercreationComponent {
     return `${year}-${month}-${day}`;
   }
 
-  shopname(value:any){
-    this.filtershop(value)
+  shopName(value:any){
+    this.isSearching = true;
+    if(value !== ''){
+      this.filtershop(value)
+      this.selectedShopLocation.nativeElement.value= ''
+      this.selectedShopDistrict.nativeElement.value=''
+      this.orderForm.get('shopName')?.patchValue('');
+      
+    } else {
+      this.filteredshop=[]
+    }
   }
 
   // filtering shops for toggle
@@ -288,6 +307,19 @@ export class OrdercreationComponent {
     this.filteredshop= this.shops.filter((e)=>{
       return e.shopName.toLocaleLowerCase().includes(value.toLocaleLowerCase()) 
     })
+    
+  }
+
+  shopSelection(shop:any){
+    this.orderForm.get('shopName')?.patchValue(shop?._id);
+    this.selectedShopName.nativeElement.value = shop?.shopName
+    this.selectedShopLocation.nativeElement.value= shop?.location
+    this.selectedShopDistrict.nativeElement.value= shop?.district
+    this.filteredshop=[]
+    this.isSearching = false;
+    console.log(this.orderForm.value);
+    
+    
   }
 }
 

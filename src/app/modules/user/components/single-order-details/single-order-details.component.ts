@@ -24,6 +24,9 @@ export class SingleOrderDetailsComponent implements OnInit{
         }
       }
     )
+    // const url= this.router.url.split('/')
+    
+    
   }
 
   singleorderdetails(id:any){
