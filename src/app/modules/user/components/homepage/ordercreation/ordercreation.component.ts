@@ -100,6 +100,9 @@ export class OrdercreationComponent {
         this.orderForm
           .get('expectingDeliveryDate')
           ?.setValue(this.formatDate(this.orderdetails?.expectingDeliveryDate));
+        this.orderForm
+          .get('imageUrl')
+          ?.setValue(this.orderdetails?.imageUrl);
         this.imagePath = this.orderdetails?.imageUrl;
       },
       error: (err) => {
@@ -219,6 +222,7 @@ export class OrdercreationComponent {
   // editOrder
   editOrder(){
     if (this.orderForm.valid) {
+      console.log(this.orderForm.value);      
       this.commonservice.confirmationBooleanValue.next(true);
       this.commonservice.confirmMessage.next(
         'Thank you for placing your order with us! Before we proceed, we want to confirm the details of your order'
