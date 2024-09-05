@@ -274,8 +274,9 @@ export class OrdercreationComponent {
             // this.commonservice.errorMessage.next(
             //   'Order editing failed. Please Try Agian.'
             // );
+            const errorMessage = err.error?.message || 'Order editing failed. Please try again.';
             this.commonservice.errorMessage.next(
-              err
+              errorMessage
             );
             console.log(err);
           },
