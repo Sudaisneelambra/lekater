@@ -271,11 +271,8 @@ export class OrdercreationComponent {
             this.commonservice.loadingbooleanValue.next(false);
             this.commonservice.confirmationBooleanValue.next(false);
             this.commonservice.ErrorbooleanValue.next(true);
-            // this.commonservice.errorMessage.next(
-            //   'Order editing failed. Please Try Agian.'
-            // );
             this.commonservice.errorMessage.next(
-              err.error?.message 
+              'Order editing failed. Please Try Agian.'
             );
             console.log(err);
           },
