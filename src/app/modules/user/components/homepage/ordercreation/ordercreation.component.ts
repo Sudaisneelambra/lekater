@@ -223,62 +223,105 @@ export class OrdercreationComponent {
   // editOrder
   editOrder(){
     if (this.orderForm.valid) {     
-      this.commonservice.confirmationBooleanValue.next(true);
-      this.commonservice.confirmMessage.next(
-        'Thank you for placing your order with us! Before we proceed, we want to confirm the details of your order'
-      );
-      const data = this.orderForm.value;
-      data.orderId= this.orderdetails._id
-      const promis = new Promise((resolve, reject) => {
-        data.resolve = resolve;
-      });
+      // this.commonservice.confirmationBooleanValue.next(true);
+      // this.commonservice.confirmMessage.next(
+      //   'Thank you for placing your order with us! Before we proceed, we want to confirm the details of your order'
+      // );
+      // const data = this.orderForm.value;
+      // data.orderId= this.orderdetails._id
+      // const promis = new Promise((resolve, reject) => {
+      //   data.resolve = resolve;
+      // });
 
-      promis.then(() => {
-        this.commonservice.loadingbooleanValue.next(true);
-        this.formdata = new FormData();
-        this.formdata.append('shopName', data.shopName);
-        this.formdata.append('itemName', data.itemName);
-        this.formdata.append('fabricNameAndCode', data.fabricNameAndCode);
-        this.formdata.append('itemDescription', data.itemDescription);
-        this.formdata.append('orderReceivedDate', data.orderReceivedDate);
-        this.formdata.append(
-          'expectingDeliveryDate',
-          data.expectingDeliveryDate
-        );
-        this.formdata.append('imageUrl', this.file);
-        this.formdata.append('orderId', data.orderId);
+      // promis.then(() => {
+      //   this.commonservice.loadingbooleanValue.next(true);
+      //   this.formdata = new FormData();
+      //   this.formdata.append('shopName', data.shopName);
+      //   this.formdata.append('itemName', data.itemName);
+      //   this.formdata.append('fabricNameAndCode', data.fabricNameAndCode);
+      //   this.formdata.append('itemDescription', data.itemDescription);
+      //   this.formdata.append('orderReceivedDate', data.orderReceivedDate);
+      //   this.formdata.append(
+      //     'expectingDeliveryDate',
+      //     data.expectingDeliveryDate
+      //   );
+      //   this.formdata.append('imageUrl', this.file);
+      //   this.formdata.append('orderId', data.orderId);
+
+      //   this.userservice.editOrder(this.formdata).subscribe({
+      //     next: (res) => {
+      //       if (res.success) {
+      //         this.commonservice.loadingbooleanValue.next(false);
+      //         this.commonservice.confirmationBooleanValue.next(false);
+      //         this.commonservice.confirmMessage.next('');
+      //         this.commonservice.successbooleanValue.next(true);
+      //         this.commonservice.successMessage.next(
+      //           'Order Edited Successfully'
+      //         );
+      //         this.reloadevent.emit(false)
+      //         this.imagePath = '/assets/images/no-photo-or-blank-image.jpg';
+      //         this.create_button_value='Create Order'
+      //         this.orderForm.reset();
+      //         this.file = null;
+      //         this.formboolean = false;
+      //         this.id=null
+      //       }
+      //     },
+      //     error: (err) => {
+      //       this.commonservice.loadingbooleanValue.next(false);
+      //       this.commonservice.confirmationBooleanValue.next(false);
+      //       this.commonservice.ErrorbooleanValue.next(true);
+      //       this.commonservice.errorMessage.next(
+      //         'Order editing failed. Please Try Agian.'
+      //       );
+      //       console.log(err);
+      //     },
+      //   });
+      // });
+      // this.commonservice.orderingdata.next(data);
+
+      const data = this.orderForm.value;
+
+      this.formdata = new FormData();
+      this.formdata.append('shopName', data.shopName);
+      this.formdata.append('itemName', data.itemName);
+      this.formdata.append('fabricNameAndCode', data.fabricNameAndCode);
+      this.formdata.append('itemDescription', data.itemDescription);
+      this.formdata.append('orderReceivedDate', data.orderReceivedDate);
+      this.formdata.append(
+        'expectingDeliveryDate',
+        data.expectingDeliveryDate
+      );
+      this.formdata.append('imageUrl', this.file);
+      this.formdata.append('orderId', data.orderId);
 
         this.userservice.editOrder(this.formdata).subscribe({
-          next: (res) => {
-            if (res.success) {
-              this.commonservice.loadingbooleanValue.next(false);
-              this.commonservice.confirmationBooleanValue.next(false);
-              this.commonservice.confirmMessage.next('');
-              this.commonservice.successbooleanValue.next(true);
-              this.commonservice.successMessage.next(
-                'Order Edited Successfully'
-              );
-              this.reloadevent.emit(false)
-              this.imagePath = '/assets/images/no-photo-or-blank-image.jpg';
-              this.create_button_value='Create Order'
-              this.orderForm.reset();
-              this.file = null;
-              this.formboolean = false;
-              this.id=null
-            }
-          },
-          error: (err) => {
-            this.commonservice.loadingbooleanValue.next(false);
-            this.commonservice.confirmationBooleanValue.next(false);
-            this.commonservice.ErrorbooleanValue.next(true);
-            this.commonservice.errorMessage.next(
-              'Order editing failed. Please Try Agian.'
+        next: (res) => {
+          if (res.success) {
+            this.commonservice.successbooleanValue.next(true);
+            this.commonservice.successMessage.next(
+              'Order Edited Successfully'
             );
-            console.log(err);
-          },
-        });
+            this.reloadevent.emit(false)
+            this.imagePath = '/assets/images/no-photo-or-blank-image.jpg';
+            this.create_button_value='Create Order'
+            this.orderForm.reset();
+            this.file = null;
+            this.formboolean = false;
+            this.id=null
+          }
+        },
+        error: (err) => {
+          this.commonservice.loadingbooleanValue.next(false);
+          this.commonservice.confirmationBooleanValue.next(false);
+          this.commonservice.ErrorbooleanValue.next(true);
+          this.commonservice.errorMessage.next(
+            'Order editing failed. Please Try Agian.'
+          );
+          console.log(err);
+        },
       });
-      this.commonservice.orderingdata.next(data);
+
     } else {
       alert('please fill the all fields');
     }
