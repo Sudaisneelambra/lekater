@@ -250,6 +250,9 @@ export class OrdercreationComponent {
         this.formdata.append('imageUrl', this.file);
         this.formdata.append('orderId', data.orderId);
 
+        console.log('muhaaaaaaaaaaaaaaa');
+        
+
         this.userservice.editOrder(this.formdata).subscribe({
           next: (res) => {
             if (res.success) {

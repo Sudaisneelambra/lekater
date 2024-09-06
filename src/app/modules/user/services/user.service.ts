@@ -16,6 +16,10 @@ export class UserService {
     return this.http.post(`${this.api}/user/createOrder`,data)
   }
   editOrder(data:any):Observable<any>{
+    console.log('anuzzzzzzzzzzzzzzzzzzz');
+    
+    console.log(data);
+    
     return this.http.patch(`${this.api}/user/editOrder`,data)
   }
 
