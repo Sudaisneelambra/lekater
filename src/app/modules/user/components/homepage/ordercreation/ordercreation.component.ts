@@ -138,20 +138,22 @@ export class OrdercreationComponent {
   
       // Check if file size exceeds the maximum allowed size
       if (this.file.size > maxSizeInBytes) {
-        alert(`File size exceeds the ${maxSizeInMB} MB limit. Please choose a smaller file.`);
         this.orderForm?.get('imageUrl')?.patchValue('');
+        alert(`File size exceeds the ${maxSizeInMB} MB limit. Please choose a smaller file.`);
         return; // Do not proceed further if the file is too large
+      } else {
+        if (this.file) {
+          console.log(this.file);        
+          this.orderForm?.get('imageUrl')?.patchValue(this.file);
+          const reader = new FileReader();
+          reader.readAsDataURL(this.file);
+          reader.onload = () => {
+            this.imagePath = reader.result;
+          };
+        }
       }
   
-      if (this.file) {
-        console.log(this.file);        
-        this.orderForm?.get('imageUrl')?.patchValue(this.file);
-        const reader = new FileReader();
-        reader.readAsDataURL(this.file);
-        reader.onload = () => {
-          this.imagePath = reader.result;
-        };
-      }
+     
     }
   }
   
