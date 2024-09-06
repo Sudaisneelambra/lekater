@@ -115,13 +115,11 @@ export class OrdercreationComponent {
 
   // file change for image selection
   OnFileChange(event: any) {
-    if (event.target.files && event.target.files.length > 0) {
-      console.log(event.target.files);
-      
+    if (event.target.files && event.target.files.length > 0) {      
       this.file = event.target.files[0];
       if (this.file) {
-        // console.log(this.file);        
-        this.orderForm?.get('imageUrl')?.setValue(this.file);
+        console.log(this.file);        
+        this.orderForm?.get('imageUrl')?.patchValue(this.file);
         const reader = new FileReader();
         reader.readAsDataURL(this.file);
         reader.onload = () => {
