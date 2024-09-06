@@ -16,7 +16,7 @@ export class UserService {
     return this.http.post(`${this.api}/user/createOrder`,data)
   }
   editOrder(data:any):Observable<any>{
-    return this.http.put(`${this.api}/user/editOrder`,data)
+    return this.http.post(`${this.api}/user/editOrder`,data)
   }
 
   getShops():Observable<any>{
