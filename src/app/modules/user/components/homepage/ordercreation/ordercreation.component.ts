@@ -114,19 +114,36 @@ export class OrdercreationComponent {
   }
 
   // file change for image selection
+  // OnFileChange(event: any) {
+  //   if (event.target.files && event.target.files.length > 0) {
+  //     console.log(event.target.files);
+      
+  //     this.file = event.target.files[0];
+  //     if (this.file) {
+  //       // console.log(this.file);        
+  //       this.orderForm?.get('imageUrl')?.setValue(this.file);
+  //       const reader = new FileReader();
+  //       reader.readAsDataURL(this.file);
+  //       reader.onload = () => {
+  //         this.imagePath = reader.result;
+  //       };
+  //     }
+  //   }
+  // }
+
   OnFileChange(event: any) {
     if (event.target.files && event.target.files.length > 0) {
-      console.log(event.target.files);
-      
-      this.file = event.target.files[0];
-      if (this.file) {
-        // console.log(this.file);        
-        this.orderForm?.get('imageUrl')?.setValue(this.file);
+      const file = event.target.files[0];
+      const validTypes = ['image/jpeg', 'image/png', 'image/gif'];
+      if (validTypes.includes(file.type)) {
+        this.file = file;
         const reader = new FileReader();
         reader.readAsDataURL(this.file);
         reader.onload = () => {
           this.imagePath = reader.result;
         };
+      } else {
+        alert('Invalid file type. Please select an image.');
       }
     }
   }
