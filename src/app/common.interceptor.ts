@@ -23,7 +23,8 @@ export class CommonInterceptor implements HttpInterceptor {
       },
     }) 
 
-
+    console.log(request,'----------');
+    
     return next.handle(request).pipe(
       tap((event: HttpEvent<any>) => {
         if (event instanceof HttpResponse) {
