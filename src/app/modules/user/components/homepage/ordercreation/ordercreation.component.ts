@@ -139,6 +139,7 @@ export class OrdercreationComponent {
       // Check if file size exceeds the maximum allowed size
       if (this.file.size > maxSizeInBytes) {
         alert(`File size exceeds the ${maxSizeInMB} MB limit. Please choose a smaller file.`);
+        this.orderForm?.get('imageUrl')?.patchValue('');
         return; // Do not proceed further if the file is too large
       }
   
