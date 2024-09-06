@@ -118,6 +118,7 @@ export class OrdercreationComponent {
     if (event.target.files && event.target.files.length > 0) {
       this.file = event.target.files[0];
       if (this.file) {
+        console.log(this.file);        
         this.orderForm?.get('imageUrl')?.setValue(this.file);
         const reader = new FileReader();
         reader.readAsDataURL(this.file);
@@ -221,8 +222,7 @@ export class OrdercreationComponent {
 
   // editOrder
   editOrder(){
-    if (this.orderForm.valid) {
-      console.log(this.orderForm.value);      
+    if (this.orderForm.valid) {     
       this.commonservice.confirmationBooleanValue.next(true);
       this.commonservice.confirmMessage.next(
         'Thank you for placing your order with us! Before we proceed, we want to confirm the details of your order'
