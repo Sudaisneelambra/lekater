@@ -114,9 +114,34 @@ export class OrdercreationComponent {
   }
 
   // file change for image selection
+  // OnFileChange(event: any) {
+  //   if (event.target.files && event.target.files.length > 0) {      
+  //     this.file = event.target.files[0];
+  //     if (this.file) {
+  //       console.log(this.file);        
+  //       this.orderForm?.get('imageUrl')?.patchValue(this.file);
+  //       const reader = new FileReader();
+  //       reader.readAsDataURL(this.file);
+  //       reader.onload = () => {
+  //         this.imagePath = reader.result;
+  //       };
+  //     }
+  //   }
+  // }
+
   OnFileChange(event: any) {
-    if (event.target.files && event.target.files.length > 0) {      
+    const maxSizeInMB = 10;
+    const maxSizeInBytes = maxSizeInMB * 1024 * 1024; // Convert MB to bytes
+  
+    if (event.target.files && event.target.files.length > 0) {
       this.file = event.target.files[0];
+  
+      // Check if file size exceeds the maximum allowed size
+      if (this.file.size > maxSizeInBytes) {
+        alert(`File size exceeds the ${maxSizeInMB} MB limit. Please choose a smaller file.`);
+        return; // Do not proceed further if the file is too large
+      }
+  
       if (this.file) {
         console.log(this.file);        
         this.orderForm?.get('imageUrl')?.patchValue(this.file);
@@ -128,6 +153,7 @@ export class OrdercreationComponent {
       }
     }
   }
+  
 
   // order creation button for form visible oor not visible
   ordercreation() {
