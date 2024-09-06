@@ -21,13 +21,12 @@ export class CommonInterceptor implements HttpInterceptor {
       setHeaders: {
         Authorization: `Bearer ${token}`,
       },
-    }) 
-
-    console.log(request,'----------');
-    
+    })    
     return next.handle(request).pipe(
       tap((event: HttpEvent<any>) => {
         if (event instanceof HttpResponse) {
+          console.log(event);
+          console.log(event.body);          
           if (event.body && event.body.expiry) {
             alert('JWT Expired. Please login again');
             this.commonservice.logout();
